@@ -1,0 +1,5 @@
+# Env file
+.env
+
+# IDEs and editors
+/.idea
