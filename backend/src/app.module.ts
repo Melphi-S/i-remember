@@ -6,6 +6,10 @@ import configuration from './config/configuration';
 import { TypeOrmConfigService } from './config/database-config.factory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WordsModule } from './words/words.module';
+import { UsersModule } from './users/users.module';
+import { TasksModule } from './tasks/tasks.module';
+import { HashModule } from './hash/hash.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,17 +17,11 @@ import { WordsModule } from './words/words.module';
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'postgres',
-    //   host: 'localhost',
-    //   port: 5432,
-    //   username: 'student',
-    //   password: 'student',
-    //   database: 'i_remember',
-    //   entities: [],
-    //   synchronize: true,
-    // }),
     WordsModule,
+    UsersModule,
+    TasksModule,
+    HashModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
