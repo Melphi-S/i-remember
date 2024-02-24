@@ -10,12 +10,29 @@ import { UsersModule } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
 import { HashModule } from './hash/hash.module';
 import { AuthModule } from './auth/auth.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
+    }),
+    MailerModule.forRoot({
+      transport:
+        'smtps://irememberverify@mail.ru:xQjf5YtDUZUQ3DSivef0@smtp.mail.ru',
+      defaults: {
+        from: '"No Reply" <irememberverify@mail.ru>',
+      },
+      template: {
+        dir: join(__dirname, '../templates/email-templates'),
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
     }),
     WordsModule,
     UsersModule,
