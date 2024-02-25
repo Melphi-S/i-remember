@@ -2,8 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import {VocabularyWord} from "../../vocabulary-words/entities/vocabulary-word.entity";
 
 @Entity()
 export class Word {
@@ -31,4 +33,7 @@ export class Word {
     nullable: true,
   })
   voice?: string;
+
+  @ManyToOne(() => VocabularyWord, (vocabularyWord) => vocabularyWord.word)
+  vocabularyWords: VocabularyWord[];
 }

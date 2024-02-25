@@ -8,9 +8,10 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { HashService } from '../hash/hash.service';
 import exceptions from '../common/constants/exceptions';
-import { Statuses } from '../users/types';
 import { UserResponseDto } from '../users/dto/user-response.dto';
 import { ResetDto } from './dto/reset.dto';
+import { UserStatuses } from '../users/types';
+import { VocabulariesService } from '../vocabularies/vocabularies.service';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
     private readonly hashService: HashService,
+    private readonly vocabulariesService: VocabulariesService,
   ) {}
 
   auth(user: UserResponseDto) {
@@ -45,7 +47,7 @@ export class AuthService {
       throw new UnauthorizedException(exceptions.auth.unauthorized);
     }
 
-    if (user.status === Statuses.PENDING) {
+    if (user.status === UserStatuses.PENDING) {
       throw new UnauthorizedException(exceptions.auth.notVerified);
     }
 
@@ -53,19 +55,24 @@ export class AuthService {
   }
 
   async verifyEmail(id: string) {
-    const user = await this.usersService.findById(id);
+    try {
+      const user = await this.usersService.findById(id);
 
-    if (!user) {
-      throw new UnauthorizedException(exceptions.auth.unauthorized);
+      if (!user) {
+        throw new UnauthorizedException(exceptions.auth.unauthorized);
+      }
+
+      if (user.status === UserStatuses.ACTIVE) {
+        throw new BadRequestException(exceptions.auth.alreadyVerified);
+      }
+
+      await this.usersService.changeStatus(id, UserStatuses.ACTIVE);
+      await this.vocabulariesService.create(id);
+
+      return this.auth(user);
+    } catch (err) {
+      console.log(err);
     }
-
-    if (user.status === Statuses.ACTIVE) {
-      throw new BadRequestException(exceptions.auth.alreadyVerified);
-    }
-
-    await this.usersService.changeStatus(id, Statuses.ACTIVE);
-
-    return this.auth(user);
   }
 
   async resetPassword(resetDto: ResetDto) {

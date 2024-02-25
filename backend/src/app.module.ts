@@ -13,6 +13,8 @@ import { AuthModule } from './auth/auth.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { join } from 'path';
+import { VocabulariesModule } from './vocabularies/vocabularies.module';
+import { VocabularyWordsModule } from './vocabulary-words/vocabulary-words.module';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { join } from 'path';
     TasksModule,
     HashModule,
     AuthModule,
+    VocabulariesModule,
+    VocabularyWordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

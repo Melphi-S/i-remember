@@ -1,18 +1,17 @@
 import {
-  Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
+  JoinTable,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { TaskType } from '../types';
 import { User } from '../../users/entities/user.entity';
 import { VocabularyWord } from '../../vocabulary-words/entities/vocabulary-word.entity';
 
 @Entity()
-export class Task {
+export class Vocabulary {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,14 +21,17 @@ export class Task {
   @CreateDateColumn()
   updatedAt: Date;
 
-  @Column()
-  type: TaskType;
+  @OneToOne(() => User, (user) => user.vocabulary)
+  user: User;
 
-  @OneToMany(() => VocabularyWord, (vocabularyWord) => vocabularyWord.task)
+  @OneToMany(
+    () => VocabularyWord,
+    (vocabularyWord) => vocabularyWord.vocabulary,
+    {
+      cascade: true,
+      eager: true,
+    },
+  )
   @JoinColumn()
   vocabularyWords?: VocabularyWord[];
-
-  @ManyToOne(() => User, (user) => user.tasks)
-  @JoinColumn()
-  user: User;
 }

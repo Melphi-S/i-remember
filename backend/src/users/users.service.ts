@@ -13,7 +13,7 @@ import exceptions from '../common/constants/exceptions';
 import { v4 as uuidv4 } from 'uuid';
 import { EmailService } from '../email/email.service';
 import { UserResponseDto } from './dto/user-response.dto';
-import { Statuses } from './types';
+import { UserStatuses } from './types';
 
 @Injectable()
 export class UsersService {
@@ -94,7 +94,7 @@ export class UsersService {
     return this.findById(id);
   }
 
-  async changeStatus(id: string, status: Statuses) {
+  async changeStatus(id: string, status: UserStatuses) {
     await this.userRepository.update({ id }, { status });
 
     return true;

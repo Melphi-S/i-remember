@@ -2,12 +2,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Task } from '../../tasks/entities/task.entity';
-import { Statuses } from '../types';
+import { Vocabulary } from '../../vocabularies/entities/vocabulary.entity';
+import { UserStatuses } from '../types';
 
 @Entity()
 export class User {
@@ -31,13 +35,21 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: Statuses.PENDING })
+  @Column({ default: UserStatuses.PENDING })
   status: string;
 
   @Column({ select: false, default: null })
   @Exclude()
   resetCode: string | null;
 
+  @OneToOne(() => Vocabulary, (vocabulary) => vocabulary.user, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  vocabulary: Vocabulary;
+
   @OneToMany(() => Task, (task) => task.user)
+  @JoinColumn()
   tasks: Task[];
 }
