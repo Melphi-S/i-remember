@@ -7,7 +7,6 @@ import { TypeOrmConfigService } from './config/database-config.factory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WordsModule } from './words/words.module';
 import { UsersModule } from './users/users.module';
-import { TasksModule } from './tasks/tasks.module';
 import { HashModule } from './hash/hash.module';
 import { AuthModule } from './auth/auth.module';
 import { MailerModule } from '@nestjs-modules/mailer';
@@ -38,7 +37,6 @@ import { VocabularyWordsModule } from './vocabulary-words/vocabulary-words.modul
     }),
     WordsModule,
     UsersModule,
-    TasksModule,
     HashModule,
     AuthModule,
     VocabulariesModule,

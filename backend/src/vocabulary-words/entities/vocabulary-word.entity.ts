@@ -7,9 +7,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Vocabulary } from '../../vocabularies/entities/vocabulary.entity';
-import { VocabularuWordsStatuses } from '../types';
-import { Task } from '../../tasks/entities/task.entity';
-import {Word} from "../../words/entities/word.entity";
+import { VocabularyWordsStatuses } from '../types';
+import { Word } from '../../words/entities/word.entity';
 
 @Entity()
 export class VocabularyWord {
@@ -32,10 +31,12 @@ export class VocabularyWord {
   @ManyToOne(() => Vocabulary, (vocabulary) => vocabulary.vocabularyWords)
   vocabulary: Vocabulary;
 
-  @ManyToOne(() => Task, (task) => task.vocabularyWords, { nullable: true })
-  @JoinColumn()
-  task?: Task | null;
+  @Column({ default: VocabularyWordsStatuses.NEW })
+  status: VocabularyWordsStatuses;
 
-  @Column({ default: VocabularuWordsStatuses.NEW })
-  status: VocabularuWordsStatuses;
+  @Column({ default: false })
+  isFailed: boolean;
+
+  @Column({ default: 0 })
+  failedTasks: number;
 }

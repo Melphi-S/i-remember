@@ -3,13 +3,10 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { Task } from '../../tasks/entities/task.entity';
 import { Vocabulary } from '../../vocabularies/entities/vocabulary.entity';
 import { UserStatuses } from '../types';
 
@@ -48,8 +45,4 @@ export class User {
   })
   @JoinColumn()
   vocabulary: Vocabulary;
-
-  @OneToMany(() => Task, (task) => task.user)
-  @JoinColumn()
-  tasks: Task[];
 }

@@ -1,8 +1,10 @@
-export enum VocabularuWordsStatuses {
-  NEW = 'new',
-  BANNED = 'banned',
-  FOR_DAILY = 'for daily',
-  FOR_WEEKLY = 'for weekly',
-  FOR_MONTHLY = 'for monthly',
-  MEMORISED = 'memorised',
+export enum VocabularyWordsStatuses {
+  BANNED,
+  NEW,
+  IN_DAILY,
+  CHECKED_DAILY,
+  IN_WEEKLY,
+  CHECKED_WEEKLY,
+  IN_MONTHLY,
+  CHECKED_MONTHLY,
 }

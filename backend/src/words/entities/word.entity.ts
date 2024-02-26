@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import {VocabularyWord} from "../../vocabulary-words/entities/vocabulary-word.entity";
+import { VocabularyWord } from '../../vocabulary-words/entities/vocabulary-word.entity';
 
 @Entity()
 export class Word {

@@ -1,6 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { VocabulariesService } from './vocabularies.service';
+import { JwtGuard } from '../auth/guards/jwt.guard';
 
+@UseGuards(JwtGuard)
 @Controller('vocabularies')
 export class VocabulariesController {
   constructor(private readonly vocabulariesService: VocabulariesService) {}
