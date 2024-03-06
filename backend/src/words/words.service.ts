@@ -20,4 +20,8 @@ export class WordsService {
   async getAll(): Promise<Word[]> {
     return this.wordRepository.find();
   }
+
+  async findById(id: number) {
+    return this.wordRepository.findOneBy({ id });
+  }
 }

@@ -8,12 +8,14 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { HashModule } from '../hash/hash.module';
 import { JwtConfigService } from '../config/jwt-cofig.factory';
+import { VocabulariesModule } from '../vocabularies/vocabularies.module';
 
 @Module({
   imports: [
     UsersModule,
     PassportModule,
     HashModule,
+    VocabulariesModule,
     JwtModule.registerAsync({
       useClass: JwtConfigService,
     }),

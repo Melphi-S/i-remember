@@ -14,7 +14,7 @@ import { User } from './entities/user.entity';
 import { UserResponseDto } from './dto/user-response.dto';
 import exceptions from '../common/constants/exceptions';
 import { JwtGuard } from '../auth/guards/jwt.guard';
-import { Statuses } from './types';
+import { UserStatuses } from './types';
 
 @UseGuards(JwtGuard)
 @Controller('users')
@@ -27,7 +27,7 @@ export class UsersController {
       throw new BadRequestException(exceptions.users.noId);
     }
 
-    if (user.status === Statuses.PENDING) {
+    if (user.status === UserStatuses.PENDING) {
       throw new UnauthorizedException(exceptions.auth.notVerified);
     }
 

@@ -7,12 +7,13 @@ import { TypeOrmConfigService } from './config/database-config.factory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WordsModule } from './words/words.module';
 import { UsersModule } from './users/users.module';
-import { TasksModule } from './tasks/tasks.module';
 import { HashModule } from './hash/hash.module';
 import { AuthModule } from './auth/auth.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { join } from 'path';
+import { VocabulariesModule } from './vocabularies/vocabularies.module';
+import { VocabularyWordsModule } from './vocabulary-words/vocabulary-words.module';
 
 @Module({
   imports: [
@@ -36,9 +37,10 @@ import { join } from 'path';
     }),
     WordsModule,
     UsersModule,
-    TasksModule,
     HashModule,
     AuthModule,
+    VocabulariesModule,
+    VocabularyWordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
