@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--inverted-bg-color);
+  color: var(--secondary-color);
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}

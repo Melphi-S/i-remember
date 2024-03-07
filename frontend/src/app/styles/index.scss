@@ -1,0 +1,18 @@
+@import "normalize/normalize/import-now";
+@import "variables/global";
+@import "themes/light";
+@import "themes/dark";
+
+.app {
+  font-family: var(--font-family_main);
+  font-size: var(--font-size-m);
+  line-height: var(--font-line-m);
+  background: var(--bg-color);
+  color: var(--primary-color);
+  min-height: 100vh;
+  min-width: 100vw;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 10px 10px 0;
+  box-sizing: border-box;
+}
