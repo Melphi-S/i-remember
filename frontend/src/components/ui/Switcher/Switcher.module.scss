@@ -1,0 +1,62 @@
+.wrapper {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.checkbox {
+  display: none;
+}
+
+.button {
+  position: relative;
+  display: block;
+  width: 100px;
+  height: 50px;
+  background-color: var(--bg-color);
+  border-radius: 350px;
+  cursor: pointer;
+}
+
+.knob {
+  width: 40px;
+  height: 40px;
+  background-size: 90px;
+  position: relative;
+  top: 5px;
+  left: 10px;
+  border-radius: 290px;
+  transition: 0.4s ease left, 0.4s ease background-position;
+  z-index: 2;
+}
+
+.language_switcher {
+  background-image: url('src/assets/icons/ru-en.jpg');
+}
+
+.theme_switcher {
+ background-image: url("https://fonoteka.top/uploads/posts/2021-06/1623728874_5-phonoteka_org-p-abstraktsiya-utro-den-vecher-noch-oboi-kra-8.jpg");
+}
+
+.left,
+.right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+  font-size: 16px;
+  margin-top: 3px;
+  z-index: 1;
+}
+
+.left {
+  margin-left: 16px;
+}
+
+.right {
+  margin-left: 60px;
+}
+
+.checkbox:checked + .button .knob {
+  left: 50px;
+  background-position: -50px 0;
+}

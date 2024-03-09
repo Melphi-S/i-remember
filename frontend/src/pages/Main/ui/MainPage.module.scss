@@ -1,7 +1,8 @@
 .main {
   margin: 20px 0;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: 'stats new'
                        'stats daylies';
   gap: 20px
