@@ -6,8 +6,8 @@ export enum Theme {
 }
 
 export enum Language {
-  ENGLISH = "english",
-  RUSSIAN = "russian",
+  ENGLISH = "en",
+  RUSSIAN = "ru",
 }
 
 interface AppState {

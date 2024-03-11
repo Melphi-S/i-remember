@@ -1,0 +1,21 @@
+.tab {
+  cursor: pointer;
+  padding: 12px 24px;
+  height: 34px;
+  font-size: var(--font-size-m);
+  line-height: var(--font-line-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-bottom: 2px transparent solid;
+  width: 100%;
+  color: var(--primary-color);
+  background: none;
+}
+
+.active {
+  border-bottom: 2px var(--inverted-bg-color) solid;
+  cursor: auto;
+}
