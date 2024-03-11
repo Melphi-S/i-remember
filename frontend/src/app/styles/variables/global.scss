@@ -1,5 +1,5 @@
 :root {
-  --font-family_main: Stengazeta, "Times New Roman", serif;
+  --font-family_main: Bauhas, "Times New Roman", serif;
   --font-size-m: 16px;
   --font-line-m: 24px;
   --font-size-l: 24px;
@@ -12,10 +12,19 @@
 }
 
 @font-face {
+  font-family: Bauhas;
+  font-style: normal;
+  src:
+          url("/src/assets/fonts/Bauhas.ttf")
+          format("truetype-variations"),
+          url("/src/assets/fonts/Bauhas.ttf") format("truetype");
+}
+
+@font-face {
   font-family: Stengazeta;
   font-style: normal;
   src:
-          url("/src/assets/fonts/Stengazeta-Regular_5.ttf")
+          url("/src/assets/fonts/Stengazeta.ttf")
           format("truetype-variations"),
-          url("/src/assets/fonts/Stengazeta-Regular_5.ttf") format("truetype");
+          url("/src/assets/fonts/Stengazeta.ttf") format("truetype");
 }

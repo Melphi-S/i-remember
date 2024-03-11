@@ -1,12 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './app/App.tsx'
-import {ThemeProvider} from "./app/providers/ThemeProvider";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./app/App.tsx";
+import { Provider } from "react-redux";
+import { store } from "./store/store.ts";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-      <ThemeProvider>
-          <App />
-      </ThemeProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
 )

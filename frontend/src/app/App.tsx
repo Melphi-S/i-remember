@@ -1,8 +1,8 @@
 import './styles/index.scss'
 import Header from "../components/Header/Header.tsx";
 import classnames from "classnames";
-import {useTheme} from "./providers/ThemeProvider";
 import AppRouter from "./providers/RouterProvider/AppRouter.tsx";
+import {useTheme} from "../hooks/useTheme.ts";
 
 function App() {
   const {theme} = useTheme()

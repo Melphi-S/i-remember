@@ -1,5 +1,6 @@
 import Switcher, {SwitcherTypes} from "../ui/Switcher/Switcher.tsx";
-import {Theme, useTheme} from "../../app/providers/ThemeProvider";
+import {useTheme} from "../../hooks/useTheme.ts";
+import {Theme} from "../../store/reducers/AppSlice.ts";
 
 const ThemeSwitcher = () => {
     const { theme, toggleTheme } = useTheme()

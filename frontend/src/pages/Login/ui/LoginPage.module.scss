@@ -1,0 +1,12 @@
+.page {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
+
+.form {
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
