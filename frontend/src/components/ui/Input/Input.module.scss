@@ -19,12 +19,12 @@
 }
 
 .inputError {
-  outline: 1px solid #f21515;
+  outline: 1px solid var(--error-color);
   border-color: transparent;
   margin-bottom: 4px;
 
   &:focus {
-    outline: 1px solid #f21515;
+    outline: 1px solid var(--error-color);
     border-color: transparent;
   }
 }
@@ -35,7 +35,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
-  color: #f21515;
+  color: var(--error-color);
 }
 
 .disabled {
@@ -45,4 +45,5 @@
 
 .inputWrapper {
   position: relative;
+  width: 100%;
 }

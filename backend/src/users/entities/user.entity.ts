@@ -21,7 +21,7 @@ export class User {
   @CreateDateColumn()
   updatedAt: Date;
 
-  @Column()
+  @Column({ default: 'friend' })
   username: string;
 
   @Column({

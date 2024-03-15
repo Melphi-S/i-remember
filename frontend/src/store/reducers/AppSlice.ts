@@ -1,13 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {Language} from "../../config/i18nConfig";
 
 export enum Theme {
   DARK = "dark",
   LIGHT = "light",
-}
-
-export enum Language {
-  ENGLISH = "en",
-  RUSSIAN = "ru",
 }
 
 interface AppState {
@@ -33,9 +29,12 @@ export const AppSlice = createSlice({
     setTheme(state, action: PayloadAction<Theme>) {
       state.theme = action.payload;
     },
+    setLanguage(state, action: PayloadAction<Language>) {
+      state.language = action.payload;
+    },
   },
 });
 
-export const { setTheme } = AppSlice.actions;
+export const { setTheme, setLanguage } = AppSlice.actions;
 
 export default AppSlice.reducer;

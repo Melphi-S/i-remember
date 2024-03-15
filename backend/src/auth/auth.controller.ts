@@ -35,9 +35,14 @@ export class AuthController {
     return true;
   }
 
-  @Get('verify/:id')
+  @Patch('verify/:id')
   async verifyByEmailCode(@Param('id') id: string) {
     return this.authService.verifyEmail(id);
+  }
+
+  @Patch('forgot')
+  async createResetCode(@Body() email: { email: string }) {
+    return this.usersService.createResetCode(email.email);
   }
 
   @Patch('reset')

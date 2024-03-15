@@ -42,8 +42,8 @@ export class UsersController {
     return this.usersService.update(user.id, updateUserDto);
   }
 
-  @Patch('forgot')
-  async createResetCode(@Body() email: { email: string }) {
-    return this.usersService.createResetCode(email.email);
-  }
+  // @Patch('forgot')
+  // async createResetCode(@Body() email: { email: string }) {
+  //   return this.usersService.createResetCode(email.email);
+  // }
 }

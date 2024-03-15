@@ -5,5 +5,9 @@
   grid-template-rows: 1fr 1fr;
   grid-template-areas: 'stats new'
                        'stats daylies';
-  gap: 20px
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
 }

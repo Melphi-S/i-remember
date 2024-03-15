@@ -14,7 +14,7 @@ const Input = forwardRef<HTMLInputElement, InputFieldProps>(
       hasError,
       errorMessage,
       disabled,
-       children,
+      children,
       ...rest
     } = props;
 

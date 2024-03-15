@@ -9,7 +9,7 @@ export class EmailService {
     await this.mailerService.sendMail({
       to: email,
       subject:
-        'Добро пожаловать в приложение IRemember! Вам необходимо подвердить ваш email.',
+        'Добро пожаловать в приложение memoRiseIt! Вам необходимо подвердить ваш email.',
       template: 'confirm',
       context: {
         username,
@@ -21,7 +21,7 @@ export class EmailService {
   async sendResetEmail(email: string, username: string, code: string) {
     await this.mailerService.sendMail({
       to: email,
-      subject: 'Поступил запрос на смену пароля в приложении IRemember',
+      subject: 'Поступил запрос на смену пароля в приложении memoRiseIt',
       template: 'reset',
       context: {
         username,

@@ -1,0 +1,15 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.error {
+  color: var(--error-color);
+  margin: 20px 0 0;
+}
+
+.blockMessage {
+  margin: 20px 0 0;
+}

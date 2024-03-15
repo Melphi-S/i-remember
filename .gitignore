@@ -1,5 +1,7 @@
 # Env file
 .env
 
+node_modules
+
 # IDEs and editors
 /.idea

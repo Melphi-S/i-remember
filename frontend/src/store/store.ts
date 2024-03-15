@@ -2,8 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import appReducer from "./reducers/AppSlice.ts";
 import userReducer from "./reducers/UserSlice.ts";
-import { authAPI } from "../services/AuthService.ts";
-import { userApi } from "../services/UserService.ts";
+import { authAPI } from "../api/services/AuthService.ts";
+import { userApi } from "../api/services/UserService.ts";
 
 export const store = configureStore({
   reducer: {
