@@ -1,4 +1,4 @@
-import { IsEmail, IsString, Length } from 'class-validator';
+import { IsEmail, IsString, Length, MinLength } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -9,6 +9,6 @@ export class CreateUserDto {
   email: string;
 
   @IsString()
-  @Length(6, 30)
+  @MinLength(8)
   password: string;
 }
