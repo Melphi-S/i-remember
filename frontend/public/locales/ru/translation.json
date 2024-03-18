@@ -35,5 +35,10 @@
   "password again": "Введите пароль повторно",
   "no match": "Пароли должны совпадать",
   "enter code": "Введите проверочный код",
-  "enter activation code": "Введите код активации"
+  "enter activation code": "Введите код активации",
+  "avatar": "Аватар.",
+  "fetch success": "Изменения успешно сохранены",
+  "change username": "Сменить имя",
+  "save": "Сохранить",
+  "cancel": "Отменить"
 }

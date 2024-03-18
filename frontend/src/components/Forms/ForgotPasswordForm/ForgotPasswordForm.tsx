@@ -32,7 +32,7 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
 
   const [forgot, { error, isLoading }] = authAPI.useForgotMutation();
 
-  const errorRequestMessage = useRequestError(ErrorGroups.EMAIL, error)
+  const errorRequestMessage = useRequestError(ErrorGroups.EMAIL, error);
 
   const { setRequestBlock, getRequestBlock } = useRequestBlock("forgot");
 
@@ -70,26 +70,36 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
   }, [getRequestBlock, secondsToUnblock]);
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} secondsToUnblock={secondsToUnblock} errorRequestMessage={errorRequestMessage}>
-      <BackButton onClick={onBack}/>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      secondsToUnblock={secondsToUnblock}
+      errorRequestMessage={errorRequestMessage}
+    >
+      <BackButton onClick={onBack} />
       <p className={styles.text}>{t("reset text")}</p>
       <Input
-          {...register("email", {
-            required: t("enter email"),
-            pattern: {
-              value: email.regExp,
-              message: t("incorrect email"),
-            },
-          })}
-          placeholder={t("email")}
-          hasError={Boolean(errors.email)}
-          errorMessage={errors.email?.message}
+        {...register("email", {
+          required: t("enter email"),
+          pattern: {
+            value: email.regExp,
+            message: t("incorrect email"),
+          },
+        })}
+        placeholder={t("email")}
+        hasError={Boolean(errors.email)}
+        errorMessage={
+          errors.email
+            ? errors.email.type === "required"
+              ? t("enter email")
+              : t("incorrect email")
+            : ""
+        }
       />
       <Button
-          className={styles.button}
-          disabled={isLoading || secondsToUnblock > 0}
-          isLoading={isLoading}
-          type="submit"
+        className={styles.button}
+        disabled={isLoading || secondsToUnblock > 0}
+        isLoading={isLoading}
+        type="submit"
       >
         {t("send reset code")}
       </Button>

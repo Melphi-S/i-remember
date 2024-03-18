@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {User} from "../models/User.ts";
 import {setUser} from "../../store/reducers/UserSlice.ts";
+import {Cookies} from "react-cookie";
+const cookies = new Cookies();
 
 export const userApi = createApi({
     reducerPath: 'userApi',
@@ -19,10 +21,27 @@ export const userApi = createApi({
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
                     const data  = await queryFulfilled;
-                    const {id, username, email} = data.data
-                    dispatch(setUser({id, username, email}));
+                    const {id, username, email, avatar, wordsPerDay} = data.data
+                    dispatch(setUser({id, username, email, avatar, wordsPerDay}));
                 } catch (error) {
                     console.log(error);
+                }
+            },
+        }),
+        patch: builder.mutation<User, Partial<User>>({
+            query: (user: Partial<User>) => ({
+                url: `/me`,
+                method: "PATCH",
+                body: user,
+                headers: {Authorization: `Bearer ${cookies.get('token')}`}
+            }),
+            async onQueryStarted(_, { dispatch, queryFulfilled}) {
+                try {
+                    const data = await queryFulfilled;
+                    const {id, username, email, avatar, wordsPerDay} = data.data
+                    dispatch(setUser({id, username, email, avatar, wordsPerDay}));
+                } catch (error) {
+                    console.log(error)
                 }
             },
         }),

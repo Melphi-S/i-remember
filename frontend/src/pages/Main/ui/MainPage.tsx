@@ -5,14 +5,13 @@ import Sticker from "../../../components/Sticker/Sticker.tsx";
 const MainPage = () => {
     return (
         <main className={styles.main}>
-            <Block/>
-            <Block>
+            <Block className={styles.new}>
                 <Sticker>Bird</Sticker>
                 <Sticker>Fancy</Sticker>
                 <Sticker>Water</Sticker>
             </Block>
-            <Block/>
-            <Block/>
+            <Block className={styles.daylies}/>
+            <Block className={styles.stats}/>
         </main>
     );
 };

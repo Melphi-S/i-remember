@@ -14,6 +14,17 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   align-items: center;
-  padding: 10px 10px 0;
+  padding: 10px 20px 0;
   box-sizing: border-box;
+}
+
+.isLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portal {
+  color: var(--primary-color);
+  font-family: var(--font-family_main);
 }

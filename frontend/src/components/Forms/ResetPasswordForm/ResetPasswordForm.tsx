@@ -59,38 +59,49 @@ const ResetPasswordForm: FC<ForgotPasswordFormProps> = ({ onBack }) => {
       <BackButton onClick={onBack} />
       <p className={styles.text}>{t("change password text")}</p>
       <InputPassword
-          {...register("password", {
-            required: t("enter password"),
-            pattern: {
-              value: password.regExp,
-              message: t("incorrect password"),
-            },
-          })}
-          placeholder={t("password")}
-          hasError={Boolean(errors.password)}
-          errorMessage={errors.password?.message}
-          isVisible={isPasswordVisible}
-          setIsVisible={setIsPasswordVisible}
+        {...register("password", {
+          required: t("enter password"),
+          pattern: {
+            value: password.regExp,
+            message: t("incorrect password"),
+          },
+        })}
+        placeholder={t("password")}
+        hasError={Boolean(errors.password)}
+        errorMessage={
+          errors.password
+            ? errors.password.type === "required"
+              ? t("enter password")
+              : t("incorrect password")
+            : ""
+        }
+        isVisible={isPasswordVisible}
+        setIsVisible={setIsPasswordVisible}
       />
       <InputPassword
         {...register("confirmPassword", {
-          required: t('password again'),
-          validate: (value) =>
-            value === getValues("password") || t('no match'),
+          required: t("password again"),
+          validate: (value) => value === getValues("password") || t("no match"),
         })}
         placeholder={t("confirm password")}
         hasError={Boolean(errors.confirmPassword)}
-        errorMessage={errors.confirmPassword?.message}
+        errorMessage={
+          errors.confirmPassword
+            ? errors.confirmPassword.type === "required"
+              ? t("password again")
+              : t("no match")
+            : ""
+        }
         isVisible={isPasswordVisible}
         setIsVisible={setIsPasswordVisible}
       />
       <Input
         {...register("code", {
-          required: t('enter code')
+          required: t("enter code"),
         })}
         placeholder={t("reset code")}
         hasError={Boolean(errors.code)}
-        errorMessage={errors.code?.message}
+        errorMessage={errors.code ? t("enter code") : ""}
       />
       <Button
         disabled={isLoading}

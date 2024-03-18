@@ -5,7 +5,7 @@ import Button from "../../ui/Button/Button.tsx";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { validationOptions } from "../../../utils/variables.ts";
 import { authAPI } from "../../../api/services/AuthService.ts";
-import {FC, useState} from "react";
+import { FC, useState } from "react";
 import Form from "../../ui/Form/Form.tsx";
 import { useRequestError } from "../../../hooks/useRequestError.ts";
 import { ErrorGroups } from "../../../api/types";
@@ -48,6 +48,8 @@ const LoginForm: FC<LoginFormProps> = ({ onResetRequest }) => {
     }
   };
 
+  console.log(errors);
+
   return (
     <Form
       onSubmit={handleSubmit(onSubmit)}
@@ -55,15 +57,21 @@ const LoginForm: FC<LoginFormProps> = ({ onResetRequest }) => {
     >
       <Input
         {...register("email", {
-          required: t("enter email"),
+          required: t("enter email"), //don't work with translation, set message in errorMessage prop below
           pattern: {
             value: email.regExp,
-            message: t("incorrect email"),
+            message: t("incorrect email"), //don't work with translation, set message in errorMessage prop below
           },
         })}
         placeholder={t("email")}
         hasError={Boolean(errors.email)}
-        errorMessage={errors.email?.message}
+        errorMessage={
+          errors.email
+            ? errors.email.type === "required"
+              ? t("enter email")
+              : t("incorrect email")
+            : ""
+        }
       />
       <InputPassword
         {...register("password", {
@@ -75,7 +83,13 @@ const LoginForm: FC<LoginFormProps> = ({ onResetRequest }) => {
         })}
         placeholder={t("password")}
         hasError={Boolean(errors.password)}
-        errorMessage={errors.password?.message}
+        errorMessage={
+          errors.password
+            ? errors.password.type === "required"
+              ? t("enter password")
+              : t("incorrect password")
+            : ""
+        }
         isVisible={isPasswordVisible}
         setIsVisible={setIsPasswordVisible}
       />

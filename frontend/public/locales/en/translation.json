@@ -35,5 +35,10 @@
   "password again": "Enter password again",
   "no match": "Passwords must match",
   "enter code": "Enter verification code",
-  "enter activation code": "Enter activation code"
+  "enter activation code": "Enter activation code",
+  "avatar": "Avatar.",
+  "fetch success": "The changes have been successfully saved",
+  "change username": "Change username",
+  "save": "Save",
+  "cancel": "Cancel"
 }

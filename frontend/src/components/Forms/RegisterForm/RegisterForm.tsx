@@ -1,4 +1,4 @@
-import styles from './RegisterForm.module.scss';
+import styles from "./RegisterForm.module.scss";
 import { useTranslation } from "react-i18next";
 import { validationOptions } from "../../../utils/variables.ts";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -58,16 +58,22 @@ const RegisterForm: FC<RegisterFormProps> = ({ onForward }) => {
           required: t("enter username"),
           minLength: {
             value: 2,
-            message: t('username length')
+            message: t("username length"),
           },
           maxLength: {
             value: 15,
-            message: t('username length')
+            message: t("username length"),
           },
         })}
         placeholder={t("username")}
         hasError={Boolean(errors.username)}
-        errorMessage={errors.username?.message}
+        errorMessage={
+          errors.username
+            ? errors.username.type === "required"
+              ? t("enter username")
+              : t("username length")
+            : ""
+        }
       />
       <Input
         {...register("email", {
@@ -79,33 +85,50 @@ const RegisterForm: FC<RegisterFormProps> = ({ onForward }) => {
         })}
         placeholder={t("email")}
         hasError={Boolean(errors.email)}
-        errorMessage={errors.email?.message}
+        errorMessage={
+          errors.email
+            ? errors.email.type === "required"
+              ? t("enter email")
+              : t("incorrect email")
+            : ""
+        }
       />
       <InputPassword
-          {...register("password", {
-            required: t("enter password"),
-            pattern: {
-              value: password.regExp,
-              message: t("incorrect password"),
-            },
-          })}
-          placeholder={t("password")}
-          hasError={Boolean(errors.password)}
-          errorMessage={errors.password?.message}
-          isVisible={isPasswordVisible}
-          setIsVisible={setIsPasswordVisible}
+        {...register("password", {
+          required: t("enter password"),
+          pattern: {
+            value: password.regExp,
+            message: t("incorrect password"),
+          },
+        })}
+        placeholder={t("password")}
+        hasError={Boolean(errors.password)}
+        errorMessage={
+          errors.password
+            ? errors.password.type === "required"
+              ? t("enter password")
+              : t("incorrect password")
+            : ""
+        }
+        isVisible={isPasswordVisible}
+        setIsVisible={setIsPasswordVisible}
       />
       <InputPassword
-          {...register("confirmPassword", {
-            required: t('password again'),
-            validate: (value) =>
-                value === getValues("password") || t('no match'),
-          })}
-          placeholder={t("confirm password")}
-          hasError={Boolean(errors.confirmPassword)}
-          errorMessage={errors.confirmPassword?.message}
-          isVisible={isPasswordVisible}
-          setIsVisible={setIsPasswordVisible}
+        {...register("confirmPassword", {
+          required: t("password again"),
+          validate: (value) => value === getValues("password") || t("no match"),
+        })}
+        placeholder={t("confirm password")}
+        hasError={Boolean(errors.confirmPassword)}
+        errorMessage={
+          errors.confirmPassword
+              ? errors.confirmPassword.type === "required"
+                  ? t("password again")
+                  : t("no match")
+              : ""
+        }
+        isVisible={isPasswordVisible}
+        setIsVisible={setIsPasswordVisible}
       />
       <button onClick={onForward} type="button" className={styles.already}>
         {t("already have confirmation code")}

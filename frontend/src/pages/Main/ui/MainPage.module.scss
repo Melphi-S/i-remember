@@ -1,13 +1,25 @@
 .main {
   margin: 20px 0;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: 'stats new'
-                       'stats daylies';
+  grid-template-areas: 'new stats'
+                       'daylies stats';
   gap: 20px;
   height: 100%;
   width: 100%;
   padding: 20px 0;
   box-sizing: border-box;
+}
+
+.new {
+  grid-area: new;
+}
+
+.daylies {
+  grid-area: daylies;
+}
+
+.stats {
+  grid-area: stats;
 }

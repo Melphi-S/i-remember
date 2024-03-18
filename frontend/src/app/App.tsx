@@ -6,17 +6,22 @@ import { useTheme } from "../hooks/useTheme.ts";
 import { userApi } from "../api/services/UserService.ts";
 import { useCookies } from "react-cookie";
 import Spinner, { SpinnerTypes } from "../components/ui/Spinner/Spinner.tsx";
+import { useState } from "react";
+import Profile from "../components/Profile/Profile.tsx";
 
 function App() {
   const { theme } = useTheme();
 
   const [{ token }] = useCookies(["token"]);
 
-  const { data, isLoading, error } = userApi.useGetMeQuery(token);
+  const { isLoading } = userApi.useGetMeQuery(token);
+
+  const [isProfileOpened, setIsProfileOpened] = useState(false);
 
   const appClass = classnames({
     app: true,
     [theme]: true,
+    isLoader: isLoading,
   });
 
   return (
@@ -25,10 +30,11 @@ function App() {
         <Spinner type={SpinnerTypes.APP} />
       ) : (
         <>
-          <Header />
+          <Header onProfileButtonClick={setIsProfileOpened} />
           <AppRouter />
         </>
       )}
+      {isProfileOpened && <Profile isProfileOpened={setIsProfileOpened} />}
     </div>
   );
 }
