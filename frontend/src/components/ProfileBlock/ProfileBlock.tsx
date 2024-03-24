@@ -1,30 +1,28 @@
 import styles from "./ProfileBlock.module.scss";
-import { Dispatch, FC, HTMLAttributes, SetStateAction } from "react";
+import { BaseSyntheticEvent, FC, HTMLAttributes, useState } from "react";
 import AccordionHeader from "../ui/AccordionHeader/AccordionHeader.tsx";
 import SaveCancelButton from "../ui/SaveCancelButton/SaveCancelButton.tsx";
 import Loader from "../ui/Loader/Loader.tsx";
 import classnames from "classnames";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
-  isOpened: boolean;
-  setIsOpened: Dispatch<SetStateAction<boolean>>;
   title: string;
   fetchError: boolean;
+  fetchErrorMessage?: string;
   fetchSuccess: boolean;
   isLoading: boolean;
   isValid: boolean;
   isPrevValue: boolean;
-  onSubmit: () => void;
+  onSubmit: (e: BaseSyntheticEvent) => Promise<void>;
   onCancel: () => void;
 }
 
 const ProfileBlock: FC<AccordionProps> = (props) => {
   const {
-    isOpened,
     title,
-    setIsOpened,
     fetchError,
+    fetchErrorMessage = "",
     fetchSuccess,
     isLoading,
     isValid,
@@ -34,9 +32,17 @@ const ProfileBlock: FC<AccordionProps> = (props) => {
     children,
   } = props;
 
+  const [isOpened, setIsOpened] = useState(false);
+
+  const { t } = useTranslation();
+
   const controlPanelState = () => {
     if (fetchError) {
-      return <span className={styles.error}>{t("unknown request error")}</span>;
+      return (
+        <span className={styles.error}>
+          {fetchErrorMessage ? fetchErrorMessage : t("unknown request error")}
+        </span>
+      );
     }
 
     if (fetchSuccess) {
@@ -73,7 +79,7 @@ const ProfileBlock: FC<AccordionProps> = (props) => {
   });
 
   return (
-    <li className={styles.accordion}>
+    <li className={styles.block}>
       <AccordionHeader
         isOpened={isOpened}
         onClick={() => setIsOpened((prev) => !prev)}

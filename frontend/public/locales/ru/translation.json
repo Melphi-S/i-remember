@@ -40,5 +40,17 @@
   "fetch success": "Изменения успешно сохранены",
   "change username": "Сменить имя",
   "save": "Сохранить",
-  "cancel": "Отменить"
+  "cancel": "Отменить",
+  "change avatar": "Сменить аватар",
+  "avatar color": "Цвет",
+  "avatar eyes": "Глаза",
+  "avatar mouth": "Рот",
+  "change password": "Сменить пароль",
+  "confirm new password": "подтвердите новый пароль",
+  "new password again": "Введите новый пароль повторно",
+  "enter new password": "Введите новый пароль",
+  "enter old password": "Введите старый пароль",
+  "old password": "старый пароль",
+  "wrong password": "Вы ввели неправильный старый пароль",
+  "change wordsPerPar": "Новых слов в день"
 }

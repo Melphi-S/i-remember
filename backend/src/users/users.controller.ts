@@ -42,8 +42,15 @@ export class UsersController {
     return this.usersService.update(user.id, updateUserDto);
   }
 
-  // @Patch('forgot')
-  // async createResetCode(@Body() email: { email: string }) {
-  //   return this.usersService.createResetCode(email.email);
-  // }
+  @Patch('me/password')
+  async updateOwnPassword(
+    @AuthUser() user: User,
+    @Body() updatePasswordDto: { oldPassword: string; newPassword: string },
+  ): Promise<boolean> {
+    return this.usersService.updatePassword(
+      user.id,
+      updatePasswordDto.oldPassword,
+      updatePasswordDto.newPassword,
+    );
+  }
 }

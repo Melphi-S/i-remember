@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
+.invertedButton {
+  background-color: var(--inverted-bg-color);
+}
+
 .knob {
   width: 40px;
   height: 40px;
@@ -38,8 +42,7 @@
  background-image: url("src/assets/icons/light-dark.jpg");
 }
 
-.left,
-.right {
+.span {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -47,6 +50,10 @@
   font-size: 16px;
   margin-top: 3px;
   z-index: 1;
+}
+
+.invertedSpan {
+  color: var(--inverted-primary-color);
 }
 
 .left {

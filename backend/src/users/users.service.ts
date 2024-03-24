@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -78,12 +79,6 @@ export class UsersService {
     id: string,
     updateUserDto: UpdateUserDto,
   ): Promise<UserResponseDto> {
-    if (updateUserDto.password) {
-      updateUserDto.password = await this.hashService.generateHash(
-        updateUserDto.password,
-      );
-    }
-
     await this.userRepository.update({ id }, updateUserDto).catch((e) => {
       if (e.code == exceptions.dbCodes.notUnique) {
         throw new BadRequestException(exceptions.users.notUnique);
@@ -93,6 +88,33 @@ export class UsersService {
     });
 
     return this.findById(id);
+  }
+
+  async updatePassword(
+    id: string,
+    oldPassword: string,
+    newPassword: string,
+  ): Promise<boolean> {
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundException(exceptions.users.notFound);
+    }
+
+    const isRightPassword = await this.hashService.compareHash(
+      oldPassword,
+      user.password,
+    );
+
+    if (!isRightPassword) {
+      throw new UnauthorizedException(exceptions.auth.unauthorized);
+    }
+
+    const hashedNewPassword = await this.hashService.generateHash(newPassword);
+
+    await this.userRepository.update({ id }, { password: hashedNewPassword });
+
+    return true;
   }
 
   async changeStatus(id: string, status: UserStatuses) {

@@ -6,11 +6,6 @@ export class UpdateUserDto {
   @IsOptional()
   username: string;
 
-  @IsString()
-  @Min(8)
-  @IsOptional()
-  password: string;
-
   @IsUrl()
   @IsOptional()
   avatar: string;
@@ -18,5 +13,5 @@ export class UpdateUserDto {
   @Min(1)
   @Max(5)
   @IsOptional()
-  wordPerDay: number;
+  wordsPerDay: number;
 }

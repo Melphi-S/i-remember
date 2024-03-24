@@ -36,13 +36,16 @@ export class User {
   @MinLength(8)
   password: string;
 
-  @Column({ default: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=Bear' })
+  @Column({
+    default:
+      'https://api.dicebear.com/8.x/fun-emoji/svg?backgroundColor=059ff2&eyes=plain&mouth=lilSmile',
+  })
   avatar: string;
 
   @Column({ default: 3 })
   @Min(1)
   @Max(5)
-  wordPerDay: number;
+  wordsPerDay: number;
 
   @Column({ default: UserStatuses.PENDING })
   status: string;

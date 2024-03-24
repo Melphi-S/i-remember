@@ -20,5 +20,8 @@ export const ErrorMessages: Record<ErrorGroups, CodeValue> = {
     },
     [ErrorGroups.ALREADY_EXIST]: {
         400: 'already exist'
-    }
+    },
+    [ErrorGroups.WRONG_PASSWORD]: {
+        401: 'wrong password'
+    },
 }

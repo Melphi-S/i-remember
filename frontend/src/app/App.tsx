@@ -34,7 +34,12 @@ function App() {
           <AppRouter />
         </>
       )}
-      {isProfileOpened && <Profile isProfileOpened={setIsProfileOpened} />}
+      {isProfileOpened && (
+        <Profile
+          setProfileOpened={setIsProfileOpened}
+          isProfileOpened={setIsProfileOpened}
+        />
+      )}
     </div>
   );
 }

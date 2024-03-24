@@ -1,5 +1,5 @@
 import styles from "./Modal.module.scss";
-import { useEffect, FC, ReactNode, useState } from "react";
+import {useEffect, FC, ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import classnames from "classnames";
@@ -28,7 +28,7 @@ const Modal: FC<ModalProps> = ({
   useEffect(() => {
     const handleEscKeydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        handleClose()
+        handleClose();
       }
     };
 
@@ -56,10 +56,10 @@ const Modal: FC<ModalProps> = ({
   });
 
   return createPortal(
-    <>
-      <div className={modalClass}>{children}</div>
-      <ModalOverlay onClick={handleClose} />
-    </>,
+      <>
+        <div className={modalClass}>{children}</div>
+        <ModalOverlay onClick={handleClose} />
+      </>,
     modalsContainer,
   );
 };

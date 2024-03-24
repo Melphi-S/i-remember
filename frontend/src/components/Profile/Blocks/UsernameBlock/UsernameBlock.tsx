@@ -1,24 +1,22 @@
-import ProfileBlock from "../../ProfileBlock/ProfileBlock.tsx";
-import Input from "../../ui/Input/Input.tsx";
-import { t } from "i18next";
+import ProfileBlock from "../../../ProfileBlock/ProfileBlock.tsx";
+import Input from "../../../ui/Input/Input.tsx";
 import { useState } from "react";
-import { useAppSelector } from "../../../store/store.ts";
-import { userApi } from "../../../api/services/UserService.ts";
+import { useAppSelector } from "../../../../store/store.ts";
+import { userApi } from "../../../../api/services/UserService.ts";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FetchResult } from "../types";
+import { FetchResult } from "../../types";
+import {useTranslation} from "react-i18next";
 
 interface ChangeNameForm {
   username: string;
 }
 
 const UsernameBlock = () => {
-  const [isOpened, setIsOpened] = useState(false);
-
   const { user } = useAppSelector((state) => state.user);
 
   const [newUsername, setNewUsername] = useState(user?.username);
 
-  const [patch, { isLoading }] = userApi.usePatchMutation();
+  const {t} = useTranslation()
 
   const {
     register,
@@ -28,6 +26,8 @@ const UsernameBlock = () => {
   } = useForm<ChangeNameForm>({ mode: "onChange" });
 
   const [fetchResult, setFetchResult] = useState<FetchResult | null>(null);
+
+  const [patch, { isLoading }] = userApi.usePatchMutation();
 
   const onSubmit: SubmitHandler<ChangeNameForm> = async (data) => {
     const result = await patch(data);
@@ -45,8 +45,6 @@ const UsernameBlock = () => {
 
   return (
     <ProfileBlock
-      isOpened={isOpened}
-      setIsOpened={setIsOpened}
       title={t('change username')}
       onSubmit={handleSubmit(onSubmit)}
       fetchError={fetchResult === FetchResult.ERROR}

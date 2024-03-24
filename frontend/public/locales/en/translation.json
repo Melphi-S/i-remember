@@ -40,5 +40,17 @@
   "fetch success": "The changes have been successfully saved",
   "change username": "Change username",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "change avatar": "Change avatar",
+  "avatar color": "Сolor",
+  "avatar eyes": "Eyes",
+  "avatar mouth": "Mouth",
+  "change password": "Change password",
+  "confirm new password": "confirm new password",
+  "new password again": "Enter new password again",
+  "enter new password": "Enter new password",
+  "enter old password": "Enter old password",
+  "old password": "old password",
+  "wrong password": "You entered the wrong old password",
+  "change wordsPerPar": "New words per day"
 }

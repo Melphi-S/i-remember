@@ -8,14 +8,32 @@ export enum SwitcherTypes {
 }
 
 interface SwitcherProps extends InputHTMLAttributes<HTMLInputElement>{
-    type: SwitcherTypes
+    type: SwitcherTypes,
+    isInvertedBackground?: boolean,
 }
 
-const Switcher: FC<SwitcherProps> = ({type, ...rest}) => {
+const Switcher: FC<SwitcherProps> = ({type, isInvertedBackground = false, ...rest}) => {
 
     const knobClass = classnames({
         [styles.knob]: true,
         [styles[type]]: true
+    })
+
+    const buttonClass = classnames({
+        [styles.button]: true,
+        [styles.invertedButton]: isInvertedBackground
+    })
+
+    const leftClass = classnames({
+        [styles.span]: true,
+        [styles.invertedSpan]: isInvertedBackground,
+        [styles.left]: true
+    })
+
+    const rightClass = classnames({
+        [styles.span]: true,
+        [styles.invertedSpan]: isInvertedBackground,
+        [styles.right]: true
     })
 
     const knobSides = {
@@ -33,10 +51,10 @@ const Switcher: FC<SwitcherProps> = ({type, ...rest}) => {
         <div className={styles.wrapper}>
             <input className={styles.checkbox} type="checkbox" id={type} {...rest}/>
 
-                <label className={styles.button} htmlFor={type}>
+                <label className={buttonClass} htmlFor={type}>
                     <div className={knobClass}></div>
-                    <div className={styles.left}>{knobSides.left[type]}</div>
-                    <div className={styles.right}>{knobSides.right[type]}</div>
+                    <div className={leftClass}>{knobSides.left[type]}</div>
+                    <div className={rightClass}>{knobSides.right[type]}</div>
                 </label>
         </div>
     );

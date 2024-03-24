@@ -1,9 +1,12 @@
 import { useTranslation } from "react-i18next";
 import Switcher, { SwitcherTypes } from "../ui/Switcher/Switcher.tsx";
 import {Language, LOCAL_STORAGE_LANGUAGE_KEY} from "../../config/i18nConfig";
+import {FC, InputHTMLAttributes} from "react";
 
-
-const LangSwitcher = () => {
+interface SwitcherProps extends InputHTMLAttributes<HTMLInputElement> {
+    isInvertedBackground?: boolean;
+}
+const LangSwitcher: FC<SwitcherProps> = ({isInvertedBackground}) => {
     const { i18n } = useTranslation()
 
     const toggleLang = async () => {
@@ -13,7 +16,7 @@ const LangSwitcher = () => {
     }
 
     return (
-        <Switcher type={SwitcherTypes.LANGUAGE} onChange={toggleLang} checked={i18n.language === Language.RUSSIAN}/>
+        <Switcher isInvertedBackground={isInvertedBackground} type={SwitcherTypes.LANGUAGE} onChange={toggleLang} checked={i18n.language === Language.RUSSIAN}/>
     );
 };
 
