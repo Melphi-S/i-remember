@@ -8,6 +8,10 @@ import { Vocabulary } from './entities/vocabulary.entity';
 import { Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
 import exceptions from '../common/constants/exceptions';
+import { VocabularyWordsService } from '../vocabulary-words/vocabulary-words.service';
+import { WordsService } from '../words/words.service';
+import { oneMonthMs, oneWeekMs } from '../common/constants/dates';
+import { VocabularyWordsStatuses } from '../vocabulary-words/types';
 
 @Injectable()
 export class VocabulariesService {
@@ -15,6 +19,8 @@ export class VocabulariesService {
     @InjectRepository(Vocabulary)
     private readonly vocabularyRepository: Repository<Vocabulary>,
     private readonly userService: UsersService,
+    private readonly vocabularyWordsService: VocabularyWordsService,
+    private readonly wordsService: WordsService,
   ) {}
   async create(userId: string) {
     try {
@@ -50,5 +56,94 @@ export class VocabulariesService {
     }
 
     return vocabulary;
+  }
+
+  async findAll() {
+    return this.vocabularyRepository.find({
+      relations: ['user'],
+    });
+  }
+
+  async getNewWords(
+    id: number,
+    userId: string,
+    wordsToAdd: number,
+  ): Promise<Vocabulary> {
+    const vocabulary = await this.findById(id);
+
+    const userWords: Map<number, boolean> = new Map();
+
+    vocabulary.vocabularyWords.forEach((word) => {
+      userWords.set(word.word.id, true);
+    });
+
+    const words = await this.wordsService.getAll();
+
+    const freeWords = words.filter((word) => !userWords.has(word.id));
+
+    for (let i = 0; i < wordsToAdd; i++) {
+      if (freeWords.length < 1) {
+        await this.closeVocabulary(id);
+        break;
+      }
+      const index = Math.floor(Math.random() * freeWords.length);
+      const newWord = freeWords[index];
+      freeWords.splice(index, 1);
+
+      await this.vocabularyWordsService.create({ userId, wordId: newWord.id });
+    }
+
+    return vocabulary;
+  }
+
+  async getTasks(id: number, userId: string) {
+    const vocabulary = await this.findById(id);
+
+    const now = Date.now();
+
+    const wordsToWeeklyTask = vocabulary.vocabularyWords.filter(
+      (word) =>
+        word.status === VocabularyWordsStatuses.CHECKED_DAILY &&
+        now - word.updatedAt.getTime() > oneWeekMs,
+    );
+
+    const wordsToMonthlyTask = vocabulary.vocabularyWords.filter(
+      (word) =>
+        word.status === VocabularyWordsStatuses.CHECKED_WEEKLY &&
+        now - word.updatedAt.getTime() > oneMonthMs,
+    );
+
+    for (let i = 0; i < wordsToWeeklyTask.length; i++) {
+      await this.vocabularyWordsService.increaseStatus(
+        userId,
+        wordsToWeeklyTask[i].id,
+      );
+    }
+
+    for (let i = 0; i < wordsToMonthlyTask.length; i++) {
+      await this.vocabularyWordsService.increaseStatus(
+        userId,
+        wordsToMonthlyTask[i].id,
+      );
+    }
+  }
+
+  async distributeBySchedule() {
+    const vocabularies = await this.findAll();
+
+    console.log(vocabularies);
+
+    for (let i = 0; i < vocabularies.length; i++) {
+      const id = vocabularies[i].id;
+      const user = vocabularies[i].user;
+
+      await this.getNewWords(id, user.id, user.wordsPerDay);
+      await this.getTasks(id, user.id);
+    }
+  }
+
+  async closeVocabulary(id: number) {
+    await this.vocabularyRepository.update({ id }, { isFull: true });
+    return true;
   }
 }

@@ -4,9 +4,16 @@ import { VocabulariesController } from './vocabularies.controller';
 import { UsersModule } from '../users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Vocabulary } from './entities/vocabulary.entity';
+import { VocabularyWordsModule } from '../vocabulary-words/vocabulary-words.module';
+import { WordsModule } from '../words/words.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Vocabulary]), UsersModule],
+  imports: [
+    TypeOrmModule.forFeature([Vocabulary]),
+    UsersModule,
+    VocabularyWordsModule,
+    WordsModule,
+  ],
   controllers: [VocabulariesController],
   providers: [VocabulariesService],
   exports: [VocabulariesService],

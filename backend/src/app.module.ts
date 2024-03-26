@@ -14,6 +14,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 import { join } from 'path';
 import { VocabulariesModule } from './vocabularies/vocabularies.module';
 import { VocabularyWordsModule } from './vocabulary-words/vocabulary-words.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { VocabularyWordsModule } from './vocabulary-words/vocabulary-words.modul
         },
       },
     }),
+    ScheduleModule.forRoot(),
     WordsModule,
     UsersModule,
     HashModule,

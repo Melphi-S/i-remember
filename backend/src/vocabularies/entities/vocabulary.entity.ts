@@ -1,4 +1,5 @@
 import {
+  Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
@@ -19,6 +20,9 @@ export class Vocabulary {
 
   @CreateDateColumn()
   updatedAt: Date;
+
+  @Column({ default: false })
+  isFull: boolean;
 
   @OneToOne(() => User, (user) => user.vocabulary)
   user: User;
