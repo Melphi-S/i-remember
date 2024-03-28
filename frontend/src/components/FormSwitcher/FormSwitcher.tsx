@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC} from "react";
 import styles from "./FormSwitcher.module.scss";
 import Tab from "../ui/Tab/Tab.tsx";
 import { LoginState } from "../../pages/Login/types";

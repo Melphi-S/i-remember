@@ -1,10 +1,11 @@
 import styles from "./ProfileBlock.module.scss";
 import { BaseSyntheticEvent, FC, HTMLAttributes, useState } from "react";
 import AccordionHeader from "../ui/AccordionHeader/AccordionHeader.tsx";
-import SaveCancelButton from "../ui/SaveCancelButton/SaveCancelButton.tsx";
+import YesNoButton from "../ui/YesNoButton/YesNoButton.tsx";
 import Loader from "../ui/Loader/Loader.tsx";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
+import { YesNoButtons } from "../ui/YesNoButton/types";
 
 interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -55,20 +56,22 @@ const ProfileBlock: FC<AccordionProps> = (props) => {
 
     return (
       <>
-        <SaveCancelButton
+        <YesNoButton
           type="submit"
+          buttonType={YesNoButtons.YES}
           disabled={isPrevValue || !isValid}
           onClick={onSubmit}
         >
           {t("save")}
-        </SaveCancelButton>
-        <SaveCancelButton
+        </YesNoButton>
+        <YesNoButton
           type="button"
+          buttonType={YesNoButtons.NO}
           disabled={isPrevValue}
           onClick={onCancel}
         >
           {t("cancel")}
-        </SaveCancelButton>
+        </YesNoButton>
       </>
     );
   };

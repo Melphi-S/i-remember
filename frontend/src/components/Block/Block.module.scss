@@ -3,10 +3,10 @@
   height: 100%;
   box-shadow: var(--inverted-bg-color) 0 3px 8px;
   border-radius: 20px;
-  padding: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 5px;
   box-sizing: border-box;
+  overflow: hidden;
 }

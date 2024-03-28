@@ -1,6 +1,7 @@
 export enum VocabularyWordsStatuses {
   BANNED,
   NEW,
+  TO_DAILY,
   IN_DAILY,
   CHECKED_DAILY,
   IN_WEEKLY,

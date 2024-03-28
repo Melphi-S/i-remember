@@ -98,7 +98,7 @@ export class VocabularyWordsService {
     try {
       const word = await this.validateUser(userId, id);
 
-      if (word.status <= VocabularyWordsStatuses.NEW) {
+      if (word.status <= VocabularyWordsStatuses.BANNED) {
         throw new BadRequestException(exceptions.vocabularies.minStatus);
       }
 

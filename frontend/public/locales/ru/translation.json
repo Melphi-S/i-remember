@@ -52,5 +52,7 @@
   "enter old password": "Введите старый пароль",
   "old password": "старый пароль",
   "wrong password": "Вы ввели неправильный старый пароль",
-  "change wordsPerPar": "Новых слов в день"
+  "change wordsPerPar": "Новых слов в день",
+  "accept": "Принять",
+  "reject": "Отклонить"
 }

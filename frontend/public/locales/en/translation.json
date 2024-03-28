@@ -52,5 +52,7 @@
   "enter old password": "Enter old password",
   "old password": "old password",
   "wrong password": "You entered the wrong old password",
-  "change wordsPerPar": "New words per day"
+  "change wordsPerPar": "New words per day",
+  "accept": "Accept",
+  "reject": "Reject"
 }

@@ -1,14 +1,18 @@
 :root {
-  --font-family_main: Bauhas, "Times New Roman", serif;
+  --font-family_main: GeorgiaPro, "Times New Roman", serif;
   --font-size-m: 16px;
   --font-line-m: 24px;
   --font-size-ml: 20px;
   --font-line-ml: 28px;
   --font-size-l: 24px;
   --font-line-l: 32px;
+  --font-size-xl: 30px;
+  --font-line-xl: 38px;
+  --font-size-xxl: 36px;
+  --font-line-xxl: 44px;
 
   --error-color: #f21515;
-  --success-color: #006400;
+  --success-color: #32CD32;
 }
 
 @font-face {
@@ -18,6 +22,16 @@
           url("/src/assets/fonts/Bauhas.ttf")
           format("truetype-variations"),
           url("/src/assets/fonts/Bauhas.ttf") format("truetype");
+}
+
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: normal;
+  src:
+          url("/src/assets/fonts/GeorgiaPro.ttf")
+          format("truetype-variations"),
+          url("/src/assets/fonts/GeorgiaPro.ttf") format("truetype");
 }
 
 @font-face {

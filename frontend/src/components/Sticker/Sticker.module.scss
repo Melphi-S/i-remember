@@ -1,15 +1,17 @@
 .sticker {
     color: #373A36;
-    font-size: 16px;
-    height: 14em;
-    margin: 1em;
-    padding: 2em;
+    font-family: Stengazeta, sans-serif;
+    font-size: var(--font-line-m);
+    line-height: var(--font-line-m);
+    height: 220px;
+    width: 220px;
+    margin: 20px auto 45px;
+    padding: 10px;
     transition: transform 0.5s;
-    width: 14em;
     cursor: pointer;
-    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
-    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    -moz-box-shadow:5px 5px 7px var(--inverted-bg-color);
+    -webkit-box-shadow: 5px 5px 7px var(--inverted-bg-color);
+    box-shadow: 5px 5px 7px var(--inverted-bg-color);
     -moz-transition: -moz-transform .15s linear;
     -o-transition: -o-transform .15s linear;
     -webkit-transition:-webkit-transform .15s linear;
@@ -18,9 +20,9 @@
     align-items: center;
 
     &:hover {
-        -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
-        -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
-        box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -moz-box-shadow:10px 10px 7px var(--inverted-bg-color);
+        -webkit-box-shadow: 10px 10px 7px var(--inverted-bg-color);
+        box-shadow:10px 10px 7px var(--inverted-bg-color);
         -webkit-transform: rotate(0) scale(1.2);
         -moz-transform: rotate(0) scale(1.2);
         -o-transform: rotate(0) scale(1.2);
@@ -29,7 +31,6 @@
     }
 }
 
-.front {
-    font-size: var(--font-line-m);
-    line-height: var(--font-line-m);
+.invisible {
+    opacity: 0;
 }

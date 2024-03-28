@@ -1,19 +1,21 @@
-import styles from './MainPage.module.scss'
+import styles from "./MainPage.module.scss";
 import Block from "../../../components/Block/Block.tsx";
-import Sticker from "../../../components/Sticker/Sticker.tsx";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import WordsSwiper from "../../../components/WordsSwiper/WordsSwiper.tsx";
 
 const MainPage = () => {
-    return (
-        <main className={styles.main}>
-            <Block className={styles.new}>
-                <Sticker>Bird</Sticker>
-                <Sticker>Fancy</Sticker>
-                <Sticker>Water</Sticker>
-            </Block>
-            <Block className={styles.daylies}/>
-            <Block className={styles.stats}/>
-        </main>
-    );
+  return (
+    <main className={styles.main}>
+      <Block className={styles.new}>
+        <WordsSwiper />
+      </Block>
+      <Block className={styles.daylies} />
+      <Block className={styles.stats} />
+    </main>
+  );
 };
 
 export default MainPage;

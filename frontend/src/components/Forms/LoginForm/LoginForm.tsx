@@ -48,8 +48,6 @@ const LoginForm: FC<LoginFormProps> = ({ onResetRequest }) => {
     }
   };
 
-  console.log(errors);
-
   return (
     <Form
       onSubmit={handleSubmit(onSubmit)}

@@ -4,7 +4,8 @@ import {FC} from "react";
 
 export enum SpinnerTypes {
     COMMON = 'common',
-    APP = 'app'
+    APP = 'app',
+    AUDIO = 'audio'
 }
 
 interface SpinnerProps  {

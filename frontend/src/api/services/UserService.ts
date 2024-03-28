@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { User } from "../models/User.ts";
 import { setUser } from "../../store/reducers/UserSlice.ts";
 import { Cookies } from "react-cookie";
+import { Vocabulary } from "../models/Vocabulary.ts";
+import { setVocabulary } from "../../store/reducers/VocabularySlice.ts";
 const cookies = new Cookies();
 
 export const userApi = createApi({
@@ -11,7 +13,7 @@ export const userApi = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    getMe: builder.query<User, string>({
+    getMe: builder.query<User & { vocabulary: Vocabulary }, string>({
       query(token) {
         return {
           url: "me",
@@ -21,8 +23,10 @@ export const userApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const data = await queryFulfilled;
-          const { id, username, email, avatar, wordsPerDay } = data.data;
+          const { id, username, email, avatar, wordsPerDay, vocabulary } =
+            data.data;
           dispatch(setUser({ id, username, email, avatar, wordsPerDay }));
+          dispatch(setVocabulary(vocabulary));
         } catch (error) {
           console.log(error);
         }

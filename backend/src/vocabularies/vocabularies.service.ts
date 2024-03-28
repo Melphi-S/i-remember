@@ -10,7 +10,7 @@ import { UsersService } from '../users/users.service';
 import exceptions from '../common/constants/exceptions';
 import { VocabularyWordsService } from '../vocabulary-words/vocabulary-words.service';
 import { WordsService } from '../words/words.service';
-import { oneMonthMs, oneWeekMs } from '../common/constants/dates';
+import { oneDayMs, oneMonthMs, oneWeekMs } from '../common/constants/dates';
 import { VocabularyWordsStatuses } from '../vocabulary-words/types';
 
 @Injectable()
@@ -101,6 +101,12 @@ export class VocabulariesService {
 
     const now = Date.now();
 
+    const wordsToDailyTask = vocabulary.vocabularyWords.filter(
+      (word) =>
+        word.status === VocabularyWordsStatuses.TO_DAILY &&
+        now - word.updatedAt.getTime() > oneDayMs,
+    );
+
     const wordsToWeeklyTask = vocabulary.vocabularyWords.filter(
       (word) =>
         word.status === VocabularyWordsStatuses.CHECKED_DAILY &&
@@ -112,6 +118,13 @@ export class VocabulariesService {
         word.status === VocabularyWordsStatuses.CHECKED_WEEKLY &&
         now - word.updatedAt.getTime() > oneMonthMs,
     );
+
+    for (let i = 0; i < wordsToDailyTask.length; i++) {
+      await this.vocabularyWordsService.increaseStatus(
+        userId,
+        wordsToDailyTask[i].id,
+      );
+    }
 
     for (let i = 0; i < wordsToWeeklyTask.length; i++) {
       await this.vocabularyWordsService.increaseStatus(
@@ -131,14 +144,17 @@ export class VocabulariesService {
   async distributeBySchedule() {
     const vocabularies = await this.findAll();
 
-    console.log(vocabularies);
-
     for (let i = 0; i < vocabularies.length; i++) {
-      const id = vocabularies[i].id;
-      const user = vocabularies[i].user;
+      const vocabulary = vocabularies[i];
 
-      await this.getNewWords(id, user.id, user.wordsPerDay);
-      await this.getTasks(id, user.id);
+      if (vocabulary.vocabularyWords.length) {
+        await this.getNewWords(
+          vocabulary.id,
+          vocabulary.user.id,
+          vocabulary.user.wordsPerDay,
+        );
+        await this.getTasks(vocabulary.id, vocabulary.user.id);
+      }
     }
   }
 
