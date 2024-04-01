@@ -1,0 +1,1 @@
+export {TasksPageAsync as TaskPage} from './ui/TasksPage.async.tsx'

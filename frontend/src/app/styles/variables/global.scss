@@ -1,5 +1,7 @@
 :root {
   --font-family_main: GeorgiaPro, "Times New Roman", serif;
+  --font-size-s: 12px;
+  --font-line-s: 20px;
   --font-size-m: 16px;
   --font-line-m: 24px;
   --font-size-ml: 20px;
@@ -14,16 +16,6 @@
   --error-color: #f21515;
   --success-color: #32CD32;
 }
-
-@font-face {
-  font-family: Bauhas;
-  font-style: normal;
-  src:
-          url("/src/assets/fonts/Bauhas.ttf")
-          format("truetype-variations"),
-          url("/src/assets/fonts/Bauhas.ttf") format("truetype");
-}
-
 
 @font-face {
   font-family: GeorgiaPro;
@@ -42,3 +34,13 @@
           format("truetype-variations"),
           url("/src/assets/fonts/Stengazeta.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: Kurochkalapkoi;
+  font-style: normal;
+  src:
+          url("/src/assets/fonts/Kurochkalapkoi.ttf")
+          format("truetype-variations"),
+          url("/src/assets/fonts/Kurochkalapkoi.ttf") format("truetype");
+}
+

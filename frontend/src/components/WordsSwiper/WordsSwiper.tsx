@@ -11,24 +11,28 @@ import { useAppSelector } from "../../store/store.ts";
 const WordsSwiper = () => {
   const { vocabulary } = useAppSelector((state) => state.vocabulary);
 
+  const newWords = vocabulary?.vocabularyWords.filter(
+    (word) => word.status === 1,
+  );
+
   return (
     <>
-      {vocabulary && (
+      {newWords && (
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={10}
-          slidesPerView={3}
+          slidesPerView={
+            newWords.length > 2 ? 3 : newWords.length === 2 ? 2 : 1
+          }
           navigation
         >
-          {vocabulary.vocabularyWords
-            .filter((word) => word.status === 1)
-            .map(({ word, id }) => {
-              return (
-                <SwiperSlide key={id} className={styles.slide}>
-                  <Sticker word={word} wordId={id} />
-                </SwiperSlide>
-              );
-            })}
+          {newWords.map(({ word, id }) => {
+            return (
+              <SwiperSlide key={id} className={styles.slide}>
+                <Sticker word={word} wordId={id} />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       )}
     </>

@@ -3,24 +3,33 @@ import Logo from "../LogoMock/Logo.tsx";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher.tsx";
 import LangSwitcher from "../LangSwitcher/LangSwitcher.tsx";
 import ProfileButton from "../ProfileButton/ProfileButton.tsx";
-import { useAppSelector } from "../../store/store.ts";
-import {Dispatch, FC, SetStateAction} from "react";
+import { Dispatch, FC, SetStateAction } from "react";
+import Navigation from "../Navigation/Navigation.tsx";
+import { useLocation } from "react-router-dom";
+import { RoutePath } from "../../config/routeConfig";
 
 interface HeaderProps {
-    onProfileButtonClick: Dispatch<SetStateAction<boolean>>
+  onProfileButtonClick: Dispatch<SetStateAction<boolean>>;
 }
 
-const Header: FC<HeaderProps> = ({onProfileButtonClick}) => {
-  const { user } = useAppSelector((store) => store.user);
+const Header: FC<HeaderProps> = ({ onProfileButtonClick }) => {
+
+  const { pathname } = useLocation();
 
   return (
     <header className={styles.header}>
-      <div className={styles.switchers}>
-        <ThemeSwitcher />
-        <LangSwitcher />
-      </div>
       <Logo />
-      {user && <ProfileButton onClick={onProfileButtonClick} />}
+      {pathname === RoutePath.login_page ? (
+        <div className={styles.switchers}>
+          <ThemeSwitcher />
+          <LangSwitcher />
+        </div>
+      ) : (
+        <>
+          <Navigation />
+          <ProfileButton onClick={onProfileButtonClick} />
+        </>
+      )}
     </header>
   );
 };

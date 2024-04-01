@@ -4,6 +4,9 @@ export const validationOptions = {
     },
     password: {
         regExp: /^(?=.*[a-zа-яё])(?=.*[A-ZА-ЯЁ])(?=.*\d)(?=.*[@#$%^&-+=()!? "]).{8,128}$/
+    },
+    translation: {
+        regExp: /^[a-zA-Z,\s]+$/,
     }
 }
 

@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  list-style-type: none;
+
+  &:first-of-type {
+    margin-right: 40px;
+  }
+
+  &:last-of-type {
+    margin-left: 40px;
+  }
+}
