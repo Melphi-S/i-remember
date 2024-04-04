@@ -71,7 +71,7 @@ export class VocabularyWordsService {
     }
   }
 
-  async increaseStatus(userId: string, id: number) {
+  async increaseStatus(userId: string, id: number, isBySchedule = false) {
     try {
       const word = await this.validateUser(userId, id);
 
@@ -84,7 +84,7 @@ export class VocabularyWordsService {
         {
           ...word,
           status: ++word.status,
-          isFailed: false,
+          isFailed: !isBySchedule ? false : word.isFailed,
         },
       );
 
@@ -98,7 +98,7 @@ export class VocabularyWordsService {
     try {
       const word = await this.validateUser(userId, id);
 
-      if (word.status <= VocabularyWordsStatuses.BANNED) {
+      if (word.status <= VocabularyWordsStatuses.NEW) {
         throw new BadRequestException(exceptions.vocabularies.minStatus);
       }
 

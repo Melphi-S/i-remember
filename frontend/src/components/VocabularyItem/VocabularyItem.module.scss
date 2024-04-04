@@ -1,0 +1,20 @@
+.item {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 2fr 4fr 2fr 1fr 1fr 1fr;
+  border-bottom: 1px dotted var(--primary-color);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-sm);
+  gap: 5px;
+}
+
+.justifyCenter {
+  justify-self: center;
+}
+
+.justifyEnd {
+  justify-self: end;
+}
+
+.withPadding {
+  padding-left: 20px;
+}

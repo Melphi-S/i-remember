@@ -8,12 +8,13 @@ import { WordInfoType } from "../../../../../components/WordInfo/types";
 import Input from "../../../../../components/ui/Input/Input.tsx";
 import { validationOptions } from "../../../../../utils/variables.ts";
 import Button from "../../../../../components/ui/Button/Button.tsx";
-import { wordsApi } from "../../../../../api/services/WordsService.ts";
 import { VocabularyWord } from "../../../../../api/models/Vocabulary.ts";
 import { useTranslation } from "react-i18next";
 import { SubmitHandler, useForm } from "react-hook-form";
 import classnames from "classnames";
 import { TaskType } from "../../../types";
+import Form from "../../../../../components/ui/Form/Form.tsx";
+import { vocabularyApi } from "../../../../../api/services/VocabularyService.ts";
 
 interface CheckForm {
   translation: string;
@@ -32,9 +33,9 @@ const TasksChecker: FC<TaskCheckerProps> = ({
   type,
 }) => {
   const [increase, { error: increaseError, isLoading: isIncreaseLoading }] =
-    wordsApi.useIncreaseStatusMutation();
+    vocabularyApi.useIncreaseStatusMutation();
   const [decrease, { error: decreaseError, isLoading: isDecreaseLoading }] =
-    wordsApi.useDecreaseStatusMutation();
+    vocabularyApi.useDecreaseStatusMutation();
 
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -125,44 +126,85 @@ const TasksChecker: FC<TaskCheckerProps> = ({
           </>
         )}
       </div>
-      <Input
-        {...register("translation", {
-          required: t("enter translation"),
-          pattern: {
-            value: validationOptions.translation.regExp,
-            message: t("incorrect translation"),
-          },
-        })}
-        disabled={isFlipped}
-        placeholder={t("translation")}
-        hasError={Boolean(errors.translation)}
-        errorMessage={
-          errors.translation
-            ? errors.translation.type === "required"
-              ? t("enter translation")
-              : t("incorrect translation")
-            : ""
+      <Form
+        onSubmit={!isFlipped ? handleSubmit(onSubmit) : handleSubmit(onNext)}
+        errorRequestMessage={
+          increaseError || decreaseError ? t("unknown request error") : ""
         }
-      />
-      {!isFlipped ? (
-        <Button
-          disabled={isIncreaseLoading || isDecreaseLoading}
-          isLoading={isIncreaseLoading || isDecreaseLoading}
-          onClick={handleSubmit(onSubmit)}
-          className={styles.button}
-        >
-          {t("check")}
-        </Button>
-      ) : (
-        <Button onClick={onNext} className={styles.button}>
-          {t("next")}
-        </Button>
-      )}
-      <div className={styles.errorWrapper}>
-        {(increaseError || decreaseError) && (
-          <span className={styles.error}>{t("unknown request error")}</span>
+      >
+        <Input
+          {...register("translation", {
+            required: t("enter translation"),
+            pattern: {
+              value: validationOptions.translation.regExp,
+              message: t("incorrect translation"),
+            },
+          })}
+          disabled={isFlipped}
+          placeholder={t("translation")}
+          hasError={Boolean(errors.translation)}
+          errorMessage={
+            errors.translation
+              ? errors.translation.type === "required"
+                ? t("enter translation")
+                : t("incorrect translation")
+              : ""
+          }
+        />
+        {!isFlipped ? (
+          <Button
+            disabled={isIncreaseLoading || isDecreaseLoading}
+            isLoading={isIncreaseLoading || isDecreaseLoading}
+            className={styles.button}
+            type="submit"
+          >
+            {t("check")}
+          </Button>
+        ) : (
+          <Button className={styles.button} type="submit">
+            {t("next")}
+          </Button>
         )}
-      </div>
+      </Form>
+      {/*<Input*/}
+      {/*  {...register("translation", {*/}
+      {/*    required: t("enter translation"),*/}
+      {/*    pattern: {*/}
+      {/*      value: validationOptions.translation.regExp,*/}
+      {/*      message: t("incorrect translation"),*/}
+      {/*    },*/}
+      {/*  })}*/}
+      {/*  disabled={isFlipped}*/}
+      {/*  placeholder={t("translation")}*/}
+      {/*  hasError={Boolean(errors.translation)}*/}
+      {/*  errorMessage={*/}
+      {/*    errors.translation*/}
+      {/*      ? errors.translation.type === "required"*/}
+      {/*        ? t("enter translation")*/}
+      {/*        : t("incorrect translation")*/}
+      {/*      : ""*/}
+      {/*  }*/}
+      {/*/>*/}
+      {/*{!isFlipped ? (*/}
+      {/*  <Button*/}
+      {/*    disabled={isIncreaseLoading || isDecreaseLoading}*/}
+      {/*    isLoading={isIncreaseLoading || isDecreaseLoading}*/}
+      {/*    onClick={handleSubmit(onSubmit)}*/}
+      {/*    className={styles.button}*/}
+      {/*    type="submit"*/}
+      {/*  >*/}
+      {/*    {t("check")}*/}
+      {/*  </Button>*/}
+      {/*) : (*/}
+      {/*  <Button onClick={onNext} className={styles.button}>*/}
+      {/*    {t("next")}*/}
+      {/*  </Button>*/}
+      {/*)}*/}
+      {/*<div className={styles.errorWrapper}>*/}
+      {/*  {(increaseError || decreaseError) && (*/}
+      {/*    <span className={styles.error}>{t("unknown request error")}</span>*/}
+      {/*  )}*/}
+      {/*</div>*/}
     </div>
   );
 };

@@ -1,6 +1,4 @@
 import styles from "./LoginPage.module.scss";
-import { TypeAnimation } from "react-type-animation";
-import { useTranslation } from "react-i18next";
 import LoginForm from "../../../components/Forms/LoginForm/LoginForm.tsx";
 import { useState } from "react";
 import { LoginState } from "../types";
@@ -10,6 +8,7 @@ import ReactCardFlip from "react-card-flip";
 import ForgotPasswordForm from "../../../components/Forms/ForgotPasswordForm/ForgotPasswordForm.tsx";
 import ResetPasswordForm from "../../../components/Forms/ResetPasswordForm/ResetPasswordForm.tsx";
 import VerifyForm from "../../../components/Forms/VerifyForm/VerifyForm.tsx";
+import WelcomeTyper from "../../../components/WelcomeTyper/WelcomeTyper.tsx";
 
 enum AdditionalState {
   RESET_CODE = "reset_code",
@@ -18,12 +17,6 @@ enum AdditionalState {
 }
 
 const LoginPage = () => {
-  const { t, i18n } = useTranslation();
-
-  const a = t("greetings");
-  const b = t("pls, login");
-  const c = t("register soon");
-
   const [loginState, setLoginState] = useState(LoginState.LOGIN);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -84,33 +77,7 @@ const LoginPage = () => {
   return (
     <main className={styles.page}>
       <div className={styles.wrapper}>
-        <TypeAnimation
-          key={i18n.language}
-          sequence={[`${a}\n${b}\n \n${c}`, 1000, ""].reduce(
-            (acc: (string | number)[], curr) => {
-              if (typeof curr === "string") {
-                const lastString =
-                  acc.filter((item) => typeof item === "string").pop() || "";
-                acc.push((lastString + " " + curr).trim());
-              } else {
-                acc.push(curr);
-              }
-              return acc;
-            },
-            [],
-          )}
-          wrapper="span"
-          speed={20}
-          style={{
-            whiteSpace: "pre-line",
-            fontSize: "50px",
-            lineHeight: "58px",
-            height: "300px",
-            marginLeft: "50px",
-          }}
-          repeat={0}
-          deletion-speed={0}
-        />
+        <WelcomeTyper />
         <div className={styles.formWrapper}>{formState()}</div>
       </div>
     </main>

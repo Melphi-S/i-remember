@@ -4,11 +4,12 @@ import { VocabularyWord } from "../models/Vocabulary.ts";
 import {
   decreaseWordStatus,
   increaseWordStatus,
+  rejectWord,
 } from "../../store/reducers/VocabularySlice.ts";
 const cookies = new Cookies();
 
-export const wordsApi = createApi({
-  reducerPath: "wordsApi",
+export const vocabularyApi = createApi({
+  reducerPath: "vocabularyApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `http://localhost:3000/vocabulary-words/`,
   }),
@@ -38,6 +39,21 @@ export const wordsApi = createApi({
         try {
           const data = await queryFulfilled;
           dispatch(decreaseWordStatus(data.data.id));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+    rejectWord: builder.mutation<VocabularyWord, number>({
+      query: (id) => ({
+        url: `${id}/ban`,
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${cookies.get("token")}` },
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const data = await queryFulfilled;
+          dispatch(rejectWord(data.data.id));
         } catch (error) {
           console.log(error);
         }

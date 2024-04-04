@@ -3,13 +3,13 @@ import Modal from "../Modal/Modal.tsx";
 import { FC } from "react";
 import { Word } from "../../api/models/Vocabulary.ts";
 import { WordColors } from "../Sticker/types";
-import { wordsApi } from "../../api/services/WordsService.ts";
 import Spinner from "../ui/Spinner/Spinner.tsx";
 import YesNoButton from "../ui/YesNoButton/YesNoButton.tsx";
 import { YesNoButtons, YesNoSize } from "../ui/YesNoButton/types";
 import { useTranslation } from "react-i18next";
 import WordInfoCard from "../WordInfoCard/WordInfoCard.tsx";
 import WordInfo from "../WordInfo/WordInfo.tsx";
+import { vocabularyApi } from "../../api/services/VocabularyService.ts";
 
 interface NewWordModalProps {
   closeModal: () => void;
@@ -25,9 +25,9 @@ const NewWordModal: FC<NewWordModalProps> = ({
   color,
 }) => {
   const [increase, { error: increaseError, isLoading: isIncreaseLoading }] =
-    wordsApi.useIncreaseStatusMutation();
-  const [decrease, { error: decreaseError, isLoading: isDecreaseLoading }] =
-    wordsApi.useDecreaseStatusMutation();
+    vocabularyApi.useIncreaseStatusMutation();
+  const [reject, { error: rejectError, isLoading: isRejectLoading }] =
+    vocabularyApi.useRejectWordMutation();
 
   const { t } = useTranslation();
 
@@ -40,7 +40,7 @@ const NewWordModal: FC<NewWordModalProps> = ({
   };
 
   const handleRejectButton = async (wordId: number) => {
-    const result = await decrease(wordId);
+    const result = await reject(wordId);
 
     if (!("error" in result)) {
       closeModal();
@@ -59,13 +59,13 @@ const NewWordModal: FC<NewWordModalProps> = ({
               <YesNoButton
                 buttonType={YesNoButtons.YES}
                 size={YesNoSize.LARGE}
-                disabled={isDecreaseLoading}
+                disabled={isRejectLoading}
                 onClick={() => handleAcceptButton(wordId)}
               >
                 {t("accept")}
               </YesNoButton>
             )}
-            {isDecreaseLoading ? (
+            {isRejectLoading ? (
               <Spinner />
             ) : (
               <YesNoButton
@@ -79,7 +79,7 @@ const NewWordModal: FC<NewWordModalProps> = ({
             )}
           </div>
           <div className={styles.errorWrapper}>
-            {(increaseError || decreaseError) && (
+            {(increaseError || rejectError) && (
               <span className={styles.error}>{t("unknown request error")}</span>
             )}
           </div>

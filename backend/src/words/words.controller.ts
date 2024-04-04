@@ -15,4 +15,9 @@ export class WordsController {
   create(@Body() createWordDto: CreateWordDto) {
     return this.wordsService.create(createWordDto);
   }
+
+  @Get('number')
+  getNumberOfWords() {
+    return this.wordsService.getNumberOfWords();
+  }
 }

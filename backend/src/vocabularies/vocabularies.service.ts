@@ -123,6 +123,7 @@ export class VocabulariesService {
       await this.vocabularyWordsService.increaseStatus(
         userId,
         wordsToDailyTask[i].id,
+        true,
       );
     }
 
@@ -130,6 +131,7 @@ export class VocabulariesService {
       await this.vocabularyWordsService.increaseStatus(
         userId,
         wordsToWeeklyTask[i].id,
+        true,
       );
     }
 
@@ -137,6 +139,7 @@ export class VocabulariesService {
       await this.vocabularyWordsService.increaseStatus(
         userId,
         wordsToMonthlyTask[i].id,
+        true,
       );
     }
   }

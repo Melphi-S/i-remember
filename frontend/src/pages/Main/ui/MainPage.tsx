@@ -9,14 +9,14 @@ import TaskBoard from "../../../components/TaskBoard/TaskBoard.tsx";
 import { useTranslation } from "react-i18next";
 import { Language } from "../../../config/i18nConfig";
 import { getDeclension, getPluralForm } from "../../../utils/functions.ts";
-import {RoutePath} from "../../../config/routeConfig";
-import {useTasks} from "../../../hooks/useTasks.ts";
+import { RoutePath } from "../../../config/routeConfig";
+import { useTasks } from "../../../hooks/useTasks.ts";
+import Statistics from "../../../components/Statistics/Statistics.tsx";
 
 const MainPage = () => {
   const { dailyTasks, weeklyTasks, monthlyTasks } = useTasks();
 
   const { i18n } = useTranslation();
-
 
   return (
     <main className={styles.main}>
@@ -64,7 +64,9 @@ const MainPage = () => {
           </TaskBoard>
         )}
       </Block>
-      <Block className={styles.stats} />
+      <Block className={styles.stats}>
+        <Statistics />
+      </Block>
     </main>
   );
 };

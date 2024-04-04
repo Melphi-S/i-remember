@@ -21,6 +21,11 @@ export class WordsService {
     return this.wordRepository.find();
   }
 
+  async getNumberOfWords(): Promise<number> {
+    const words = await this.wordRepository.find();
+    return words.length;
+  }
+
   async findById(id: number) {
     return this.wordRepository.findOneBy({ id });
   }

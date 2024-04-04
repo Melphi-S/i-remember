@@ -1,6 +1,6 @@
 import styles from "./Select.module.scss";
-import {Dispatch, FC, SetStateAction} from "react";
-import ReactSelect from "react-select";
+import { Dispatch, FC, SetStateAction } from "react";
+import ReactSelect, {SingleValue} from "react-select";
 
 export interface Option {
   value: string;
@@ -11,11 +11,15 @@ interface SelectProps {
   options: Option[];
   title: string;
   selectedOption: Option | null;
-  setSelectedOption: Dispatch<SetStateAction<Option | null>>
+  setSelectedOption: ((value: SingleValue<Option>) => void) | Dispatch<SetStateAction<Option | null>>;
 }
 
-const Select: FC<SelectProps> = ({ options, title, selectedOption, setSelectedOption }) => {
-
+const Select: FC<SelectProps> = ({
+  options,
+  title,
+  selectedOption,
+  setSelectedOption,
+}) => {
   return (
     <div className={styles.wrapper}>
       <span className={styles.title}>{title}</span>

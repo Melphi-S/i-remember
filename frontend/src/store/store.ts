@@ -5,7 +5,8 @@ import userReducer from "./reducers/UserSlice.ts";
 import vocabularyReducer from "./reducers/VocabularySlice.ts";
 import { authAPI } from "../api/services/AuthService.ts";
 import { userApi } from "../api/services/UserService.ts";
-import { wordsApi } from "../api/services/WordsService.ts";
+import {vocabularyApi} from "../api/services/VocabularyService.ts";
+import {baseWordsApi} from "../api/services/BaseWordsService.ts";
 
 export const store = configureStore({
   reducer: {
@@ -14,13 +15,15 @@ export const store = configureStore({
     vocabulary: vocabularyReducer,
     [authAPI.reducerPath]: authAPI.reducer,
     [userApi.reducerPath]: userApi.reducer,
-    [wordsApi.reducerPath]: wordsApi.reducer,
+    [vocabularyApi.reducerPath]: vocabularyApi.reducer,
+    [baseWordsApi.reducerPath]: baseWordsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(authAPI.middleware)
       .concat(userApi.middleware)
-      .concat(wordsApi.middleware),
+      .concat(vocabularyApi.middleware)
+      .concat(baseWordsApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

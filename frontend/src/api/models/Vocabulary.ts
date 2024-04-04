@@ -10,6 +10,7 @@ export interface VocabularyWord {
   word: Word;
   isFailed: boolean;
   failedTasks: number;
+  createdAt: Date
 }
 
 export interface Word {
