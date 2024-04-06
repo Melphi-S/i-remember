@@ -17,4 +17,11 @@ export default () => ({
   hash: {
     salt: Number(process.env.SALT) || 10,
   },
+  avatar: {
+    url: process.env.AVATAR_URL,
+  },
+  email: {
+    smtp: process.env.SMTP,
+    address: process.env.EMAIL,
+  },
 });

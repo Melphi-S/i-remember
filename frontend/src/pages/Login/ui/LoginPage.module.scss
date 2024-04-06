@@ -1,3 +1,5 @@
+@import "../../../app/styles/mixins";
+
 .page {
   display: flex;
   justify-content: center;
@@ -11,6 +13,11 @@
   width: 100%;
   margin: 0 20px;
   gap: 20px;
+
+  @include laptop {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 }
 
 .formWrapper {
@@ -24,4 +31,12 @@
   border-left: 1px var(--inverted-bg-color) solid;
   padding: 0 50px;
   box-sizing: border-box;
+
+  @include laptop {
+    border-left: none;
+  }
+  @include mobile {
+    padding: 0;
+  }
+
 }

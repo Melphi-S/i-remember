@@ -12,6 +12,7 @@ import Input from "../../../components/ui/Input/Input.tsx";
 import { useTranslation } from "react-i18next";
 import StatusCheckboxes, {
   Checkboxes,
+  LOCAL_STORAGE_CHECKBOX_KEY,
 } from "./parts/StatusCheckboxes/StatusCheckboxes.tsx";
 import TableHeader from "./parts/TableHeader/TableHeader.tsx";
 import TableList from "./parts/TableList/TableList.tsx";
@@ -39,7 +40,15 @@ const VocabularyPage = () => {
 
   const [filter, setFilter] = useState("");
 
-  const [statusToDisplay, setStatusToDisplay] = useState(defaultStatuses);
+  const localStorageCheckboxes = localStorage.getItem(
+    LOCAL_STORAGE_CHECKBOX_KEY,
+  );
+
+  const [statusToDisplay, setStatusToDisplay] = useState(
+    localStorageCheckboxes
+      ? JSON.parse(localStorageCheckboxes)
+      : defaultStatuses,
+  );
 
   const handleSortChanging = (value: SingleValue<Option>) => {
     if (value) {

@@ -10,7 +10,7 @@ import { WordsModule } from '../words/words.module';
   imports: [
     TypeOrmModule.forFeature([VocabularyWord]),
     UsersModule,
-    WordsModule,
+    WordsModule
   ],
   controllers: [VocabularyWordsController],
   providers: [VocabularyWordsService],

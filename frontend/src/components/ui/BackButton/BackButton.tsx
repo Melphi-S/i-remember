@@ -1,4 +1,3 @@
-/// <reference types="vite-plugin-svgr/client" />
 import styles from "./BackButton.module.scss"
 import {ButtonHTMLAttributes, FC} from "react";
 import BackArrow from "../../../assets/icons/arrow-left.svg?react";

@@ -1,6 +1,8 @@
+@import "../../../../../app/styles/mixins";
+
 .header {
   display: grid;
-  grid-template-columns: 2fr 0.5fr 2fr 4fr 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 0.5fr 2fr 4fr 2fr 1fr 1fr 1fr 1fr;
   gap: 5px;
   padding: 10px 0;
   margin: 20px 0;
@@ -9,6 +11,18 @@
   color: var(--inverted-primary-color);
   background-color: var(--inverted-bg-color);
   border-radius: 20px;
+
+  @include laptop {
+    grid-template-columns: 2fr 0.5fr 2fr 3fr 1fr;
+  }
+
+  @include tablet {
+    grid-template-columns: 2fr 3fr 1fr;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr 2fr;
+  }
 }
 
 .centerTitle {

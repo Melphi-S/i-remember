@@ -1,0 +1,29 @@
+.modal {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: 10px;
+  background: var(--bg-color);
+  height: 500px;
+  width: 500px;
+  padding: 30px;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.parameter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px dotted var(--primary-color);
+}
+
+.title {
+  font-size: var(--font-size-m);
+  line-height: var(--font-size-m);
+}
+
+.value {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-size-sm);
+}

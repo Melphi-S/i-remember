@@ -1,3 +1,5 @@
+@import "../../../../../app/styles/mixins";
+
 .message {
   margin: 20px 0;
   padding: 0;
@@ -5,4 +7,9 @@
   line-height: var(--font-line-xxl);
   width: 100%;
   text-align: center;
+
+  @include mobile {
+    font-size: var(--font-size-l);
+    line-height: var(--font-line-l);
+  }
 }

@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--bg-color);
+  width: 500px;
+  height: 500px;
+  padding: 30px;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.text {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-ml);
+  line-height: var(--font-line-ml);
+  text-align: center;
+}
+
+.errorWrapper {
+  height: 20px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.error {
+  display: inline-block;
+  color: var(--error-color);
+  text-align: center;
+  width: 100%;
+}

@@ -1,5 +1,11 @@
+@import "../../app/styles/mixins";
+
 .logo {
   height: 40px;
+
+  @include mobile {
+    height: 50px;
+  }
 }
 
 .pointer {

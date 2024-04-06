@@ -93,7 +93,7 @@ export class VocabulariesService {
       await this.vocabularyWordsService.create({ userId, wordId: newWord.id });
     }
 
-    return vocabulary;
+    return this.findById(id);
   }
 
   async getTasks(id: number, userId: string) {
@@ -146,6 +146,8 @@ export class VocabulariesService {
 
   async distributeBySchedule() {
     const vocabularies = await this.findAll();
+
+    console.log(new Date());
 
     for (let i = 0; i < vocabularies.length; i++) {
       const vocabulary = vocabularies[i];

@@ -1,3 +1,5 @@
+@import "../../app/styles/mixins";
+
 .modal {
   position: fixed;
   box-sizing: border-box;
@@ -5,6 +7,14 @@
   justify-content: center;
   align-items: center;
   border-radius: 20px;
+  z-index: 999;
+}
+
+.closeButton {
+  position: absolute;
+  left: 50%;
+  top: -60px;
+  transform: translateX(-50%);
   z-index: 999;
 }
 
@@ -16,14 +26,29 @@
   animation: rising 0.5s forwards;
 }
 
+$profileWidth: 24.5vw;
+
 .profile {
   top: 0;
   right: 0;
   margin: 100px 20px 0;
   animation: slide 0.3s forwards;
   height: calc(100% - 120px);
-  box-shadow: var(--inverted-bg-color) 0 3px 8px;
-  background: var(--bg-color);
+  box-sizing: border-box;
+
+  @include laptop {
+    $profileWidth: 40vw !global;
+  }
+
+  @include tablet {
+    $profileWidth: 55vw !global;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 100px 0 0;
+    $profileWidth: 94vw !global;
+  }
 }
 
 .closeProfile {
@@ -32,7 +57,7 @@
 
 @keyframes slide {
   0% {
-    right: calc(-25vw - 20px);
+    right: -$profileWidth;
   }
 
   100% {
@@ -46,7 +71,7 @@
   }
 
   100% {
-    right: calc(-25vw - 20px);
+    right: -$profileWidth;
   }
 }
 

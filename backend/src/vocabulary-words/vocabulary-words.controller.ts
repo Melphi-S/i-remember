@@ -24,18 +24,28 @@ export class VocabularyWordsController {
     return this.vocabularyWordsService.create(createVocabularyWordDto);
   }
 
+
   @Patch(':id/increase')
   increaseStatus(@AuthUser() user: User, @Param('id') id: number) {
     return this.vocabularyWordsService.increaseStatus(user.id, id);
   }
 
-  @Patch(':id/decrease')
-  decreaseStatus(@AuthUser() user: User, @Param('id') id: number) {
-    return this.vocabularyWordsService.decreaseStatus(user.id, id);
+  @Patch(':id/decrease/:step')
+  decreaseStatus(
+    @AuthUser() user: User,
+    @Param('id') id: number,
+    @Param('step') step: number,
+  ) {
+    return this.vocabularyWordsService.decreaseStatus(user.id, id, step);
   }
 
-  @Patch(':id/ban')
-  banWord(@AuthUser() user: User, @Param('id') id: number) {
-    return this.vocabularyWordsService.banWord(user.id, id);
+  @Patch(':id/accept')
+  acceptWord(@AuthUser() user: User, @Param('id') id: number) {
+    return this.vocabularyWordsService.acceptWord(user.id, id);
+  }
+
+  @Patch(':id/reject')
+  rejectWord(@AuthUser() user: User, @Param('id') id: number) {
+    return this.vocabularyWordsService.rejectWord(user.id, id);
   }
 }

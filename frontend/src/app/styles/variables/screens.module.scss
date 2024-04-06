@@ -1,0 +1,9 @@
+$laptop-width: 1500px;
+$tablet-width: 1100px;
+$mobile-width: 750px;
+
+:export {
+  laptopWidth: $laptop-width;
+  tabletWidth: $tablet-width;
+  mobileWidth: $mobile-width;
+}

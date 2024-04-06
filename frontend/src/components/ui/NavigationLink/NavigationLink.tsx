@@ -5,12 +5,14 @@ import classnames from "classnames";
 
 interface NavigationLinkProps extends LinkProps {
   number?: number | undefined;
+  className?: string;
 }
 
 const NavigationLink: FC<NavigationLinkProps> = ({
   to,
   number = undefined,
   children,
+  className = "",
   ...rest
 }) => {
   const { pathname } = useLocation();
@@ -18,6 +20,7 @@ const NavigationLink: FC<NavigationLinkProps> = ({
   const linkClass = classnames({
     [styles.link]: true,
     [styles.active]: pathname === to,
+    [className]: true
   });
 
   return (
@@ -25,7 +28,7 @@ const NavigationLink: FC<NavigationLinkProps> = ({
       <>
         {children}
         {number !== undefined && (
-          <span className={styles.number}>{number < 100 ? number : '99+'}</span>
+          <span className={styles.number}>{number < 100 ? number : "99+"}</span>
         )}
       </>
     </Link>

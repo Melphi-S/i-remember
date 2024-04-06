@@ -13,8 +13,8 @@
 }
 
 .small {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
 }
 
 .button {
@@ -22,4 +22,5 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
 }

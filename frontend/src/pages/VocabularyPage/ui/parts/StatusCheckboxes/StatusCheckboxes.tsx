@@ -17,6 +17,8 @@ interface StatusCheckboxesProps {
   setCheckboxes: Dispatch<SetStateAction<Checkboxes>>;
 }
 
+export const LOCAL_STORAGE_CHECKBOX_KEY = "checkboxes";
+
 const StatusCheckboxes: FC<StatusCheckboxesProps> = ({
   checkboxes,
   setCheckboxes,
@@ -26,6 +28,14 @@ const StatusCheckboxes: FC<StatusCheckboxesProps> = ({
       ...checkboxes,
       [status]: !checkboxes[status],
     });
+
+    localStorage.setItem(
+      LOCAL_STORAGE_CHECKBOX_KEY,
+      JSON.stringify({
+        ...checkboxes,
+        [status]: !checkboxes[status],
+      }),
+    );
   };
 
   const { t } = useTranslation();

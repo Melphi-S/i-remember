@@ -1,9 +1,10 @@
 import styles from "./Modal.module.scss";
-import {useEffect, FC, ReactNode, useState } from "react";
+import { useEffect, FC, ReactNode, useState } from "react";
 import { createPortal } from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import classnames from "classnames";
 import { useTheme } from "../../hooks/useTheme.ts";
+import CloseButton from "../ui/CloseButton/CloseButton.tsx";
 
 const modalsContainer = document.querySelector("#modals") as HTMLElement;
 
@@ -16,11 +17,13 @@ interface ModalProps {
   closeModal: () => void;
   children: ReactNode;
   forType?: ModalFor;
+  isCloseButton?: boolean;
 }
 
 const Modal: FC<ModalProps> = ({
   closeModal,
   forType = ModalFor.POPUP,
+  isCloseButton = false,
   children,
 }) => {
   const [closing, setClosing] = useState(false);
@@ -56,10 +59,16 @@ const Modal: FC<ModalProps> = ({
   });
 
   return createPortal(
-      <>
-        <div className={modalClass}>{children}</div>
-        <ModalOverlay onClick={handleClose} />
-      </>,
+    <>
+      <div className={modalClass}>
+        {isCloseButton && (
+          <CloseButton onClick={handleClose} className={styles.closeButton} />
+        )}
+
+        {children}
+      </div>
+      <ModalOverlay onClick={handleClose} />
+    </>,
     modalsContainer,
   );
 };

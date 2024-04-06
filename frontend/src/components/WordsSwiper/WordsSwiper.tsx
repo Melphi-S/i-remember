@@ -6,36 +6,48 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { useAppSelector } from "../../store/store.ts";
+import { useResize } from "../../hooks/useResize.tsx";
+import { VocabularyWord } from "../../api/models/Vocabulary.ts";
+import { FC } from "react";
 
-const WordsSwiper = () => {
-  const { vocabulary } = useAppSelector((state) => state.vocabulary);
+interface WordsSwiperProps {
+  newWords: VocabularyWord[];
+}
 
-  const newWords = vocabulary?.vocabularyWords.filter(
-    (word) => word.status === 1,
-  );
+const WordsSwiper: FC<WordsSwiperProps> = ({ newWords }) => {
+  const { isTabletScreen, isMobileScreen } = useResize();
+
+  const getNumberOfSlides = () => {
+    if (!newWords) {
+      return 1;
+    }
+
+    if (newWords.length < 2 || isMobileScreen) {
+      return 1;
+    }
+
+    if (newWords.length < 3 || isTabletScreen) {
+      return 2;
+    }
+
+    return 3;
+  };
 
   return (
-    <>
-      {newWords && (
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          spaceBetween={10}
-          slidesPerView={
-            newWords.length > 2 ? 3 : newWords.length === 2 ? 2 : 1
-          }
-          navigation
-        >
-          {newWords.map(({ word, id }) => {
-            return (
-              <SwiperSlide key={id} className={styles.slide}>
-                <Sticker word={word} wordId={id} />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      )}
-    </>
+    <Swiper
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={10}
+      slidesPerView={getNumberOfSlides()}
+      navigation
+    >
+      {newWords.map(({ word, id }) => {
+        return (
+          <SwiperSlide key={id} className={styles.slide}>
+            <Sticker word={word} wordId={id} />
+          </SwiperSlide>
+        );
+      })}
+    </Swiper>
   );
 };
 

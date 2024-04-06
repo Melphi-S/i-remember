@@ -5,5 +5,7 @@ export enum AppRoutes {
     DAILY = 'daily_page',
     WEEKLY = "weekly_page",
     MONTHLY = "monthly_page",
-    VOCABULARY = "vocabulary_page"
+    VOCABULARY = "vocabulary_page",
+    STATISTICS = "statistics_page",
+    NO_FOUND_PAGE = "no_found_page",
 }

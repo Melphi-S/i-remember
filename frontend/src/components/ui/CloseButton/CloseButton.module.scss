@@ -1,0 +1,19 @@
+.button {
+  background: transparent;
+  border: none;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.icon {
+  height: 100%;
+  width: 100%;
+}
+
+.icon * {
+  fill: var(--onModal-color);
+  color: var(--onModal-color);
+}

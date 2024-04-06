@@ -1,7 +1,6 @@
-/// <reference types="vite-plugin-svgr/client" />
 import styles from "./AudioButton.module.scss";
 import Spinner, { SpinnerTypes } from "../Spinner/Spinner.tsx";
-import { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import AudioIcon from "../../../assets/icons/audio.svg?react";
 import NoAudioIcon from "../../../assets/icons/no-audio.svg?react";
 import { AudioButtonSizes } from "./types";
@@ -19,20 +18,26 @@ const AudioButton: FC<AudioButtonProps> = ({
   useTheme = false,
 }) => {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (voice) {
-      const audio = new Audio(voice);
-      const setLoadedAudio = () => setAudio(audio);
-      audio.addEventListener("canplaythrough", setLoadedAudio, false);
+  const playAudio = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.stopPropagation();
 
-      return () => audio.removeEventListener("canplaythrough", setLoadedAudio);
-    }
-  }, [voice]);
-
-  const playAudio = async () => {
     try {
-      await audio?.play();
+      if (!audio) {
+        setIsLoading(true);
+        const audio = new Audio(voice);
+        const setLoadedAudio = () => setAudio(audio);
+        audio.addEventListener("canplaythrough", setLoadedAudio, false);
+        audio.oncanplaythrough = async () => {
+          setIsLoading(false);
+          await audio?.play();
+        };
+      } else {
+        await audio?.play();
+      }
     } catch (err) {
       console.log("Failed to play..." + err);
     }
@@ -48,24 +53,31 @@ const AudioButton: FC<AudioButtonProps> = ({
     [styles[size]]: true,
   });
 
+  if (!voice) {
+    return <NoAudioIcon className={noAudioIconClass} />;
+  }
+
+  if (voice && isLoading) {
+    return (
+      <Spinner
+        type={
+          size === AudioButtonSizes.COMMON
+            ? SpinnerTypes.AUDIO
+            : SpinnerTypes.COMMON
+        }
+      />
+    );
+  }
+
   return (
-    <div className={styles.audioContainer}>
-      {!voice && <NoAudioIcon className={noAudioIconClass} />}
-      {voice && !audio && (
-        <Spinner
-          type={
-            size === AudioButtonSizes.COMMON
-              ? SpinnerTypes.AUDIO
-              : SpinnerTypes.COMMON
-          }
-        />
-      )}
-      {voice && audio && (
-        <button className={styles.button} onClick={playAudio}>
-          <AudioIcon className={audioIconClass}/>
-        </button>
-      )}
-    </div>
+    <button
+      className={styles.button}
+      onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+        playAudio(e)
+      }
+    >
+      <AudioIcon className={audioIconClass} />
+    </button>
   );
 };
 

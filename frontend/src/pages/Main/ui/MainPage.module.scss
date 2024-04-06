@@ -1,15 +1,25 @@
+@import "../../../app/styles/mixins";
+
 .main {
   margin: 20px 0;
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: 'new stats'
-                       'daylies stats';
+  grid-template-areas:
+    "new stats"
+    "daylies stats";
   gap: 20px;
   height: 100%;
   width: 100%;
   padding: 20px 0;
   box-sizing: border-box;
+
+  @include laptop {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "new"
+      "daylies";
+  }
 }
 
 .new {

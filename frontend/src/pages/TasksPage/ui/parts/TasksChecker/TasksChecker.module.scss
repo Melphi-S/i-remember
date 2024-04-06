@@ -1,3 +1,5 @@
+@import "../../../../../app/styles/mixins";
+
 .wrapper {
   width: min-content;
   margin: 0 auto;
@@ -11,6 +13,11 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+
+  @include mobile {
+    min-height: 96px;
+  }
+
 }
 
 .brief {

@@ -26,12 +26,15 @@ export const vocabularySlice = createSlice({
         word.isFailed = false;
       }
     },
-    decreaseWordStatus: (state, action: PayloadAction<number>) => {
+    decreaseWordStatus: (
+      state,
+      action: PayloadAction<{ id: number; status: VocabularyWordsStatuses }>,
+    ) => {
       const word = state.vocabulary?.vocabularyWords.find(
-        (word) => word.id === action.payload,
+        (word) => word.id === action.payload.id,
       );
       if (word) {
-        word.status--;
+        word.status = action.payload.status;
         word.isFailed = true;
         word.failedTasks++;
       }
@@ -44,10 +47,23 @@ export const vocabularySlice = createSlice({
         word.status = VocabularyWordsStatuses.BANNED;
       }
     },
+    acceptWord: (state, action: PayloadAction<number>) => {
+      const word = state.vocabulary?.vocabularyWords.find(
+        (word) => word.id === action.payload,
+      );
+      if (word) {
+        word.status = VocabularyWordsStatuses.TO_DAILY;
+      }
+    },
   },
 });
 
-export const { setVocabulary, increaseWordStatus, decreaseWordStatus, rejectWord } =
-  vocabularySlice.actions;
+export const {
+  setVocabulary,
+  increaseWordStatus,
+  decreaseWordStatus,
+  rejectWord,
+  acceptWord,
+} = vocabularySlice.actions;
 
 export default vocabularySlice.reducer;

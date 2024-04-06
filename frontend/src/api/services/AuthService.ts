@@ -2,13 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {PasswordReset, UserSignin, UserSignup} from "../models/User.ts";
 import { userApi } from "./UserService.ts";
 import { Cookies } from "react-cookie";
-import {oneYear} from "../../utils/variables.ts";
+import {API_URL, oneYear} from "../../utils/variables.ts";
 const cookies = new Cookies();
 
 export const authAPI = createApi({
   reducerPath: "authAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/",
+    baseUrl: API_URL,
   }),
   tagTypes: ["Auth"],
   endpoints: (builder) => ({

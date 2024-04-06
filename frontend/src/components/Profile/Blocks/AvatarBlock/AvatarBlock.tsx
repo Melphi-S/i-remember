@@ -7,6 +7,7 @@ import ProfileBlock from "../../../ProfileBlock/ProfileBlock.tsx";
 import Select, { Option } from "../../../ui/Select/Select.tsx";
 import { HexColorPicker } from "react-colorful";
 import { useTranslation } from "react-i18next";
+import { AVATAR_URL } from "../../../../utils/variables.ts";
 
 const eyes: Option[] = [
   { value: "closed", label: "closed" },
@@ -44,8 +45,6 @@ const mouth: Option[] = [
   { value: "wideSmile", label: "wideSmile" },
 ];
 
-const baseAvatarUrl = "https://api.dicebear.com/8.x/fun-emoji/svg";
-
 const AvatarBlock = () => {
   const { user } = useAppSelector((state) => state.user);
 
@@ -72,7 +71,7 @@ const AvatarBlock = () => {
 
   useEffect(() => {
     setNewAvatar(
-      `${baseAvatarUrl}?backgroundColor=${avatarColor}&eyes=${avatarEyes?.value}&mouth=${avatarMouth?.value}`,
+      `${AVATAR_URL}?backgroundColor=${avatarColor}&eyes=${avatarEyes?.value}&mouth=${avatarMouth?.value}`,
     );
   }, [avatarColor, avatarEyes, avatarMouth]);
 

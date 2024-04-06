@@ -1,0 +1,19 @@
+.small {
+  width: 30px;
+  height: 30px;
+}
+
+.large {
+  width: 60px;
+  height: 60px;
+}
+
+.withColor * {
+  fill: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.withInvertedColor * {
+  fill: var(--inverted-primary-color);
+  color: var(--inverted-primary-color);
+}

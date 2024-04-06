@@ -7,9 +7,9 @@ import "./config/i18nConfig/index.ts";
 import Spinner from "./components/ui/Spinner/Spinner.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <Suspense fallback={<Spinner/>}>
+  <Suspense fallback={<Spinner />}>
       <Provider store={store}>
         <App />
       </Provider>
-    </Suspense>
+  </Suspense>,
 );

@@ -23,10 +23,9 @@ import { ScheduleModule } from '@nestjs/schedule';
       useClass: TypeOrmConfigService,
     }),
     MailerModule.forRoot({
-      transport:
-        'smtps://irememberverify@mail.ru:xQjf5YtDUZUQ3DSivef0@smtp.mail.ru',
+      transport: configuration().email.smtp,
       defaults: {
-        from: '"No Reply" <irememberverify@mail.ru>',
+        from: `"No Reply" <${configuration().email.address}>`,
       },
       template: {
         dir: join(__dirname, '../templates/email-templates'),

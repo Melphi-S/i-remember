@@ -4,12 +4,13 @@ import { setUser } from "../../store/reducers/UserSlice.ts";
 import { Cookies } from "react-cookie";
 import { Vocabulary } from "../models/Vocabulary.ts";
 import { setVocabulary } from "../../store/reducers/VocabularySlice.ts";
+import {API_URL} from "../../utils/variables.ts";
 const cookies = new Cookies();
 
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://localhost:3000/users/`,
+    baseUrl: `${API_URL}/users/`,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({

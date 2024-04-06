@@ -94,7 +94,7 @@ export class VocabularyWordsService {
     }
   }
 
-  async decreaseStatus(userId: string, id: number) {
+  async decreaseStatus(userId: string, id: number, step: number = 1) {
     try {
       const word = await this.validateUser(userId, id);
 
@@ -106,7 +106,7 @@ export class VocabularyWordsService {
         { id },
         {
           ...word,
-          status: --word.status,
+          status: word.status - step,
           isFailed: true,
           failedTasks: ++word.failedTasks,
         },
@@ -118,7 +118,29 @@ export class VocabularyWordsService {
     }
   }
 
-  async banWord(userId: string, id: number) {
+  async acceptWord(userId: string, id: number) {
+    try {
+      const word = await this.validateUser(userId, id);
+
+      if (word.status > VocabularyWordsStatuses.NEW) {
+        throw new BadRequestException(exceptions.vocabularies.alreadyAccepted);
+      }
+
+      await this.vocabularyWordRepository.update(
+        { id },
+        {
+          ...word,
+          status: VocabularyWordsStatuses.TO_DAILY,
+        },
+      );
+
+      return this.findById(id);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async rejectWord(userId: string, id: number) {
     try {
       const word = await this.validateUser(userId, id);
 

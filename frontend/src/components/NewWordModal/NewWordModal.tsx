@@ -9,7 +9,7 @@ import { YesNoButtons, YesNoSize } from "../ui/YesNoButton/types";
 import { useTranslation } from "react-i18next";
 import WordInfoCard from "../WordInfoCard/WordInfoCard.tsx";
 import WordInfo from "../WordInfo/WordInfo.tsx";
-import { vocabularyApi } from "../../api/services/VocabularyService.ts";
+import { vocabularyWordsApi } from "../../api/services/VocabularyWordsService.ts";
 
 interface NewWordModalProps {
   closeModal: () => void;
@@ -24,15 +24,15 @@ const NewWordModal: FC<NewWordModalProps> = ({
   wordId,
   color,
 }) => {
-  const [increase, { error: increaseError, isLoading: isIncreaseLoading }] =
-    vocabularyApi.useIncreaseStatusMutation();
+  const [accept, { error: acceptError, isLoading: isAcceptLoading }] =
+    vocabularyWordsApi.useAcceptWordMutation();
   const [reject, { error: rejectError, isLoading: isRejectLoading }] =
-    vocabularyApi.useRejectWordMutation();
+    vocabularyWordsApi.useRejectWordMutation();
 
   const { t } = useTranslation();
 
   const handleAcceptButton = async (wordId: number) => {
-    const result = await increase(wordId);
+    const result = await accept(wordId);
 
     if (!("error" in result)) {
       closeModal();
@@ -53,7 +53,7 @@ const NewWordModal: FC<NewWordModalProps> = ({
         <WordInfo word={word} />
         <div className={styles.footer}>
           <div className={styles.buttonContainer}>
-            {isIncreaseLoading ? (
+            {isAcceptLoading ? (
               <Spinner />
             ) : (
               <YesNoButton
@@ -71,7 +71,7 @@ const NewWordModal: FC<NewWordModalProps> = ({
               <YesNoButton
                 buttonType={YesNoButtons.NO}
                 size={YesNoSize.LARGE}
-                disabled={isIncreaseLoading}
+                disabled={isAcceptLoading}
                 onClick={() => handleRejectButton(wordId)}
               >
                 {t("reject")}
@@ -79,7 +79,7 @@ const NewWordModal: FC<NewWordModalProps> = ({
             )}
           </div>
           <div className={styles.errorWrapper}>
-            {(increaseError || rejectError) && (
+            {(acceptError || rejectError) && (
               <span className={styles.error}>{t("unknown request error")}</span>
             )}
           </div>

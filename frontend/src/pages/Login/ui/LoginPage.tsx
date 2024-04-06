@@ -9,6 +9,7 @@ import ForgotPasswordForm from "../../../components/Forms/ForgotPasswordForm/For
 import ResetPasswordForm from "../../../components/Forms/ResetPasswordForm/ResetPasswordForm.tsx";
 import VerifyForm from "../../../components/Forms/VerifyForm/VerifyForm.tsx";
 import WelcomeTyper from "../../../components/WelcomeTyper/WelcomeTyper.tsx";
+import { useResize } from "../../../hooks/useResize.tsx";
 
 enum AdditionalState {
   RESET_CODE = "reset_code",
@@ -22,6 +23,8 @@ const LoginPage = () => {
 
   const [additionalState, setAdditionalState] =
     useState<AdditionalState | null>(null);
+
+  const { isLaptopScreen } = useResize();
 
   const handleTabClick = (loginState: LoginState) => {
     setLoginState(loginState);
@@ -77,7 +80,7 @@ const LoginPage = () => {
   return (
     <main className={styles.page}>
       <div className={styles.wrapper}>
-        <WelcomeTyper />
+        {!isLaptopScreen && <WelcomeTyper />}
         <div className={styles.formWrapper}>{formState()}</div>
       </div>
     </main>

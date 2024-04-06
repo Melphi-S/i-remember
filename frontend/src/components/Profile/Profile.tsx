@@ -24,7 +24,7 @@ const Profile: FC<ProfileProps> = ({ isProfileOpened, setProfileOpened }) => {
   };
 
   return (
-    <Modal forType={ModalFor.PROFILE} closeModal={() => isProfileOpened(false)}>
+    <Modal forType={ModalFor.PROFILE} isCloseButton={true} closeModal={() => isProfileOpened(false)}>
       <div className={styles.profile}>
         <ul className={styles.forms}>
           <UsernameBlock />

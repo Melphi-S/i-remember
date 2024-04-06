@@ -14,7 +14,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import classnames from "classnames";
 import { TaskType } from "../../../types";
 import Form from "../../../../../components/ui/Form/Form.tsx";
-import { vocabularyApi } from "../../../../../api/services/VocabularyService.ts";
+import { VocabularyWordsStatuses } from "../../../../../api/types";
+import { vocabularyWordsApi } from "../../../../../api/services/VocabularyWordsService.ts";
 
 interface CheckForm {
   translation: string;
@@ -33,9 +34,9 @@ const TasksChecker: FC<TaskCheckerProps> = ({
   type,
 }) => {
   const [increase, { error: increaseError, isLoading: isIncreaseLoading }] =
-    vocabularyApi.useIncreaseStatusMutation();
+    vocabularyWordsApi.useIncreaseStatusMutation();
   const [decrease, { error: decreaseError, isLoading: isDecreaseLoading }] =
-    vocabularyApi.useDecreaseStatusMutation();
+    vocabularyWordsApi.useDecreaseStatusMutation();
 
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -64,7 +65,17 @@ const TasksChecker: FC<TaskCheckerProps> = ({
         setIsFlipped(true);
       }
     } else {
-      const result = await decrease(tasks[curTask].id);
+      const getStep = () => {
+        if (tasks[curTask].status === VocabularyWordsStatuses.IN_MONTHLY) {
+          return 4;
+        }
+        if (tasks[curTask].status === VocabularyWordsStatuses.IN_WEEKLY) {
+          return 2;
+        }
+
+        return 1;
+      };
+      const result = await decrease({ id: tasks[curTask].id, step: getStep() });
       if (!("error" in result)) {
         setCheckResult(false);
         setIsFlipped(true);
@@ -92,10 +103,20 @@ const TasksChecker: FC<TaskCheckerProps> = ({
     [styles.checkWrapper_wrong]: checkResult === false,
   });
 
-  const taskTime = {
-    [TaskType.DAILY]: t("day"),
-    [TaskType.WEEKLY]: t("week"),
-    [TaskType.MONTHLY]: t("month"),
+  const getBriefMessage = () => {
+    if (checkResult) {
+      if (type === TaskType.DAILY) {
+        return t("you receive this word in weekly");
+      }
+      if (type === TaskType.WEEKLY) {
+        return t("you receive this word in monthly");
+      }
+      if (type === TaskType.MONTHLY) {
+        return t("congratulation");
+      }
+    } else {
+      return t("you receive this task again");
+    }
   };
 
   return (
@@ -120,9 +141,7 @@ const TasksChecker: FC<TaskCheckerProps> = ({
             <span className={resultMessageClass}>
               {checkResult ? t("right") : t("wrong")}
             </span>
-            <p
-              className={styles.brief}
-            >{`${t("you receive this task again")} ${taskTime[type]}`}</p>
+            <p className={styles.brief}>{getBriefMessage()}</p>
           </>
         )}
       </div>
@@ -166,45 +185,6 @@ const TasksChecker: FC<TaskCheckerProps> = ({
           </Button>
         )}
       </Form>
-      {/*<Input*/}
-      {/*  {...register("translation", {*/}
-      {/*    required: t("enter translation"),*/}
-      {/*    pattern: {*/}
-      {/*      value: validationOptions.translation.regExp,*/}
-      {/*      message: t("incorrect translation"),*/}
-      {/*    },*/}
-      {/*  })}*/}
-      {/*  disabled={isFlipped}*/}
-      {/*  placeholder={t("translation")}*/}
-      {/*  hasError={Boolean(errors.translation)}*/}
-      {/*  errorMessage={*/}
-      {/*    errors.translation*/}
-      {/*      ? errors.translation.type === "required"*/}
-      {/*        ? t("enter translation")*/}
-      {/*        : t("incorrect translation")*/}
-      {/*      : ""*/}
-      {/*  }*/}
-      {/*/>*/}
-      {/*{!isFlipped ? (*/}
-      {/*  <Button*/}
-      {/*    disabled={isIncreaseLoading || isDecreaseLoading}*/}
-      {/*    isLoading={isIncreaseLoading || isDecreaseLoading}*/}
-      {/*    onClick={handleSubmit(onSubmit)}*/}
-      {/*    className={styles.button}*/}
-      {/*    type="submit"*/}
-      {/*  >*/}
-      {/*    {t("check")}*/}
-      {/*  </Button>*/}
-      {/*) : (*/}
-      {/*  <Button onClick={onNext} className={styles.button}>*/}
-      {/*    {t("next")}*/}
-      {/*  </Button>*/}
-      {/*)}*/}
-      {/*<div className={styles.errorWrapper}>*/}
-      {/*  {(increaseError || decreaseError) && (*/}
-      {/*    <span className={styles.error}>{t("unknown request error")}</span>*/}
-      {/*  )}*/}
-      {/*</div>*/}
     </div>
   );
 };

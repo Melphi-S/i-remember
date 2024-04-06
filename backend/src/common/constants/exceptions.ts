@@ -18,6 +18,7 @@ export default {
     maxStatus: 'It is not possible to increase the maximum status',
     minStatus: 'It is not possible to decrease the minimum status',
     alreadyBanned: 'Word is already banned',
+    alreadyAccepted: 'Word is already accepted',
   },
   dbCodes: {
     notUnique: '23505',

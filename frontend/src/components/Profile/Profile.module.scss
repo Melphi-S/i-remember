@@ -1,3 +1,5 @@
+@import "../../app/styles/mixins";
+
 .profile {
   width: 24.5vw;
   height: 100%;
@@ -5,6 +7,22 @@
   box-sizing: border-box;
   display: grid;
   grid-template-rows: 1fr auto;
+  box-shadow: var(--inverted-bg-color) 0 3px 8px;
+  background: var(--bg-color);
+  border-radius: 20px;
+
+  @include laptop {
+    width: 40vw;
+  }
+
+  @include tablet {
+    width: 55vw;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 0 20px;
+  }
 }
 
 .forms {
