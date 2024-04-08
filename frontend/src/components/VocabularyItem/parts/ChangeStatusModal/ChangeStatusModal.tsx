@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import YesNoButton from "../../../ui/YesNoButton/YesNoButton.tsx";
 import { YesNoButtons, YesNoSize } from "../../../ui/YesNoButton/types";
 import Spinner from "../../../ui/Spinner/Spinner.tsx";
-import {vocabularyWordsApi} from "../../../../api/services/VocabularyWordsService.ts";
+import { vocabularyWordsApi } from "../../../../api/services/VocabularyWordsService.ts";
 
 interface ChangeStatusModalProps {
   closeModal: () => void;
@@ -23,7 +23,7 @@ const ChangeStatusModal: FC<ChangeStatusModalProps> = ({
   const [accept, { error: acceptError, isLoading: isAcceptLoading }] =
     vocabularyWordsApi.useAcceptWordMutation();
   const [reject, { error: rejectError, isLoading: isRejectLoading }] =
-      vocabularyWordsApi.useRejectWordMutation();
+    vocabularyWordsApi.useRejectWordMutation();
 
   const handleAcceptButton = async (wordId: number) => {
     const result = await accept(wordId);
@@ -42,7 +42,7 @@ const ChangeStatusModal: FC<ChangeStatusModalProps> = ({
   };
 
   return (
-    <Modal closeModal={closeModal} isCloseButton={true}>
+    <Modal closeModal={closeModal}>
       {word.status === VocabularyWordsStatuses.BANNED ? (
         <div className={styles.wrapper}>
           <p className={styles.text}>{t("change status warning accept")}</p>
@@ -50,13 +50,22 @@ const ChangeStatusModal: FC<ChangeStatusModalProps> = ({
           {isAcceptLoading ? (
             <Spinner />
           ) : (
-            <YesNoButton
-              size={YesNoSize.LARGE}
-              buttonType={YesNoButtons.YES}
-              onClick={() => handleAcceptButton(word.id)}
-            >
-              {t("confirm")}
-            </YesNoButton>
+            <div className={styles.buttonContainer}>
+              <YesNoButton
+                size={YesNoSize.LARGE}
+                buttonType={YesNoButtons.YES}
+                onClick={() => handleAcceptButton(word.id)}
+              >
+                {t("confirm")}
+              </YesNoButton>
+              <YesNoButton
+                size={YesNoSize.LARGE}
+                buttonType={YesNoButtons.NO}
+                onClick={closeModal}
+              >
+                {t("cancel")}
+              </YesNoButton>
+            </div>
           )}
           <div className={styles.errorWrapper}>
             {acceptError && (
@@ -71,13 +80,22 @@ const ChangeStatusModal: FC<ChangeStatusModalProps> = ({
           {isRejectLoading ? (
             <Spinner />
           ) : (
-            <YesNoButton
-              size={YesNoSize.LARGE}
-              buttonType={YesNoButtons.NO}
-              onClick={() => handleRejectButton(word.id)}
-            >
-              {t("confirm")}
-            </YesNoButton>
+            <div className={styles.buttonContainer}>
+              <YesNoButton
+                size={YesNoSize.LARGE}
+                buttonType={YesNoButtons.YES}
+                onClick={() => handleRejectButton(word.id)}
+              >
+                {t("confirm")}
+              </YesNoButton>
+              <YesNoButton
+                size={YesNoSize.LARGE}
+                buttonType={YesNoButtons.NO}
+                onClick={closeModal}
+              >
+                {t("cancel")}
+              </YesNoButton>
+            </div>
           )}
           <div className={styles.errorWrapper}>
             {rejectError && (

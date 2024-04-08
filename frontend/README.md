@@ -1,30 +1,43 @@
-# React + TypeScript + Vite
+# memoRiseIt (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Технологии
 
-Currently, two official plugins are available:
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Redux](https://redux.js.org/)
+- [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
+- [React Hook Form](https://react-hook-form.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Начало работы
 
-## Expanding the ESLint configuration
+### Требования
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Для установки и запуска проекта, необходим [NodeJS](https://nodejs.org/) v18+.
 
-- Configure the top-level `parserOptions` property like this:
+### Установка зависимостей
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Для установки зависимостей, выполните команду:
+
+```sh
+$ npm i
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Установка переменных окружения
+
+Для установки переменных окружения создайте в корне проекта файл **_.env_** и заполните его по примеру из файла **_.env.example_**
+
+### Сборка проекта
+
+Чтобы собрать проект, выполните команду:
+
+```sh
+npm run build
+```
+
+### Запуск фронтенда локально
+
+Чтобы запустить фронтенд локально, выполните команду:
+
+```sh
+npm run dev
+```

@@ -16,6 +16,12 @@
   top: -60px;
   transform: translateX(-50%);
   z-index: 999;
+
+  @include mobile {
+    left: auto;
+    top: 5px;
+    right: 10px;
+  }
 }
 
 .popup {
