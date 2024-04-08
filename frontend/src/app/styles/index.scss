@@ -2,6 +2,7 @@
 @import "variables/global";
 @import "themes/light";
 @import "themes/dark";
+@import "mixins";
 
 .app {
   font-family: var(--font-family_main);
@@ -16,6 +17,10 @@
   align-items: center;
   padding: 10px 20px 0;
   box-sizing: border-box;
+
+  @include mobile {
+    padding: 0;
+  }
 }
 
 .isLoader {

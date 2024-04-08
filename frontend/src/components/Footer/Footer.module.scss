@@ -1,3 +1,5 @@
+@import "../../app/styles/mixins";
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -10,6 +12,11 @@
   box-sizing: border-box;
   margin-bottom: 10px;
   height: 70px;
+
+  @include mobile {
+    border-radius: 0;
+    margin-bottom: 0;
+  }
 }
 
 .copyright {

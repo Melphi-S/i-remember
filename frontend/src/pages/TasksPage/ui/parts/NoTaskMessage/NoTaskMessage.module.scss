@@ -7,9 +7,11 @@
   line-height: var(--font-line-xxl);
   width: 100%;
   text-align: center;
+  box-sizing: border-box;
 
   @include mobile {
     font-size: var(--font-size-l);
     line-height: var(--font-line-l);
+    padding: 0 20px;
   }
 }
