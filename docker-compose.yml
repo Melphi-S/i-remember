@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  backend:
+    container_name: mri-backend
+    build: ./backend
+    env_file: ./backend/.env
+    ports:
+      - "4000:3000"
+    restart: unless-stopped
+    depends_on:
+      - database
+    networks:
+      - backend
+
+  frontend:
+    container_name: mri-frontend
+    build: ./frontend
+    env_file: ./frontend/.env
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    networks:
+      - frontend
+
+  database:
+    container_name: mri-database
+    image: "postgres:15-alpine"
+    env_file: ./backend/.env
+    restart: unless-stopped
+    volumes:
+      - db-data:/data/postgres
+    networks:
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  backend:
+  frontend:

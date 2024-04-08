@@ -10,8 +10,13 @@ import { UsersService } from '../users/users.service';
 import exceptions from '../common/constants/exceptions';
 import { VocabularyWordsService } from '../vocabulary-words/vocabulary-words.service';
 import { WordsService } from '../words/words.service';
-import { oneDayMs, oneMonthMs, oneWeekMs } from '../common/constants/dates';
 import { VocabularyWordsStatuses } from '../vocabulary-words/types';
+import {
+  getDaysBetween,
+  oneDay,
+  oneMonth,
+  oneWeek,
+} from '../common/constants/dates';
 
 @Injectable()
 export class VocabulariesService {
@@ -99,24 +104,24 @@ export class VocabulariesService {
   async getTasks(id: number, userId: string) {
     const vocabulary = await this.findById(id);
 
-    const now = Date.now();
+    const now = new Date();
 
     const wordsToDailyTask = vocabulary.vocabularyWords.filter(
       (word) =>
         word.status === VocabularyWordsStatuses.TO_DAILY &&
-        now - word.updatedAt.getTime() > oneDayMs,
+        getDaysBetween(now, new Date(word.updatedAt)) >= oneDay,
     );
 
     const wordsToWeeklyTask = vocabulary.vocabularyWords.filter(
       (word) =>
         word.status === VocabularyWordsStatuses.CHECKED_DAILY &&
-        now - word.updatedAt.getTime() > oneWeekMs,
+        getDaysBetween(now, new Date(word.updatedAt)) >= oneWeek,
     );
 
     const wordsToMonthlyTask = vocabulary.vocabularyWords.filter(
       (word) =>
         word.status === VocabularyWordsStatuses.CHECKED_WEEKLY &&
-        now - word.updatedAt.getTime() > oneMonthMs,
+        getDaysBetween(now, new Date(word.updatedAt)) >= oneMonth,
     );
 
     for (let i = 0; i < wordsToDailyTask.length; i++) {
@@ -146,8 +151,6 @@ export class VocabulariesService {
 
   async distributeBySchedule() {
     const vocabularies = await this.findAll();
-
-    console.log(new Date());
 
     for (let i = 0; i < vocabularies.length; i++) {
       const vocabulary = vocabularies[i];

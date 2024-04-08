@@ -26,7 +26,7 @@ export class EmailService {
       context: {
         username,
         code,
-      }
+      },
     });
   }
 }

@@ -8,13 +8,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { HashService } from '../hash/hash.service';
 import exceptions from '../common/constants/exceptions';
 import { v4 as uuidv4 } from 'uuid';
 import { EmailService } from '../email/email.service';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UserStatuses } from './types';
+import queryRunner from '../common/helpers/queryRunner';
 
 @Injectable()
 export class UsersService {
@@ -23,6 +24,7 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
     private readonly hashService: HashService,
     private readonly emailService: EmailService,
+    private readonly dataSource: DataSource,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<boolean> {

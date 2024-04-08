@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { WordsService } from './words.service';
 import { CreateWordDto } from './dto/create-word.dto';
 
@@ -12,8 +12,8 @@ export class WordsController {
   }
 
   @Post()
-  create(@Body() createWordDto: CreateWordDto) {
-    return this.wordsService.create(createWordDto);
+  create(@Body() createWordDto: CreateWordDto, @Query('pass') pass: string) {
+    return this.wordsService.create(createWordDto, pass);
   }
 
   @Get('number')

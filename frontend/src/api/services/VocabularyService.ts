@@ -20,7 +20,6 @@ export const vocabularyApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const data = await queryFulfilled;
-          console.log('RTK', data)
           dispatch(setVocabulary(data.data));
         } catch (error) {
           console.log(error);

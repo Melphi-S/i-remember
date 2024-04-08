@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { TypeOrmConfigService } from './config/database-config.factory';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -22,18 +22,21 @@ import { ScheduleModule } from '@nestjs/schedule';
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
-    MailerModule.forRoot({
-      transport: configuration().email.smtp,
-      defaults: {
-        from: `"No Reply" <${configuration().email.address}>`,
-      },
-      template: {
-        dir: join(__dirname, '../templates/email-templates'),
-        adapter: new HandlebarsAdapter(),
-        options: {
-          strict: true,
+    MailerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        transport: configService.get<string>('email.smtp'),
+        defaults: {
+          from: `"No Reply" <${configService.get<string>('email.address')}>`,
         },
-      },
+        template: {
+          dir: join(__dirname, 'email/templates'),
+          adapter: new HandlebarsAdapter(),
+          options: {
+            strict: true,
+          },
+        },
+      }),
     }),
     ScheduleModule.forRoot(),
     WordsModule,

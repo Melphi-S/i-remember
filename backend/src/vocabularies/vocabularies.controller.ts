@@ -24,7 +24,7 @@ export class VocabulariesController {
     );
   }
 
-  @Cron(CronExpression.EVERY_5_MINUTES)
+  @Cron(CronExpression.EVERY_DAY_AT_4AM)
   async distributeBySchedule() {
     return this.vocabulariesService.distributeBySchedule();
   }
