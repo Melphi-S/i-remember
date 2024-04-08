@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "vite-bundle-visualizer": "^1.1.0"
+  }
+}

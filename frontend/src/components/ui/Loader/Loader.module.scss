@@ -1,0 +1,44 @@
+.loader {
+  color: gray;
+  height: 20px;
+  overflow-x: hidden;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  &:before {
+    animation: left-to-right 3s alternate infinite linear;
+    background-image: linear-gradient(to right, transparent, var(--secondary-color), transparent);
+    content: "";
+    height: 10px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 5px;
+  }
+  &:after {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--bg-color),
+      var(--bg-color) 2px,
+      transparent 2px,
+      transparent 30px
+    );
+    content: "";
+    height: 10px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 5px;
+  }
+}
+
+@keyframes left-to-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

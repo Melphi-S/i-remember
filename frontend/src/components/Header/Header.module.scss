@@ -1,0 +1,22 @@
+@import "../../app/styles/mixins";
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--inverted-bg-color);
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+
+  @include mobile {
+    border-radius: 0;
+  }
+}
+
+.switchers {
+  display: flex;
+  gap: 5px;
+}

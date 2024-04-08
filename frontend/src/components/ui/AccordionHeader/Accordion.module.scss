@@ -1,0 +1,33 @@
+.header {
+  border: none;
+  margin: 0;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  font-size: var(--font-size-l);
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.openHeader {
+  border-radius: 20px 20px 0 0;
+}
+
+.icon {
+  height: 20px;
+  transform: rotate(180deg);
+  transition: all 0.2s linear;
+}
+
+.icon * {
+  fill: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.isOpened {
+  transform: rotate(0);
+}

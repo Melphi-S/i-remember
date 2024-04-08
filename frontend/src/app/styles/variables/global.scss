@@ -1,0 +1,49 @@
+:root {
+  --font-family_main: GeorgiaPro, "Times New Roman", serif;
+  --font-size-s: 12px;
+  --font-line-s: 20px;
+  --font-size-sm: 14px;
+  --font-line-sm: 22px;
+  --font-size-m: 16px;
+  --font-line-m: 24px;
+  --font-size-ml: 20px;
+  --font-line-ml: 28px;
+  --font-size-l: 24px;
+  --font-line-l: 32px;
+  --font-size-xl: 30px;
+  --font-line-xl: 38px;
+  --font-size-xxl: 36px;
+  --font-line-xxl: 44px;
+
+  --error-color: #f21515;
+  --success-color: #32CD32;
+  --onModal-color: #FFFFFF;
+}
+
+@font-face {
+  font-family: GeorgiaPro;
+  font-style: normal;
+  src:
+          url("/src/assets/fonts/GeorgiaPro.ttf")
+          format("truetype-variations"),
+          url("/src/assets/fonts/GeorgiaPro.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Stengazeta;
+  font-style: normal;
+  src:
+          url("/src/assets/fonts/Stengazeta.ttf")
+          format("truetype-variations"),
+          url("/src/assets/fonts/Stengazeta.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Kurochkalapkoi;
+  font-style: normal;
+  src:
+          url("/src/assets/fonts/Kurochkalapkoi.ttf")
+          format("truetype-variations"),
+          url("/src/assets/fonts/Kurochkalapkoi.ttf") format("truetype");
+}
+

@@ -1,0 +1,54 @@
+@import "../../../app/styles/mixins";
+
+.page {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 20px;
+
+  @include mobile {
+    padding: 20px 20px 0;
+  }
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  max-height: 67vh;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.inputWrapper {
+  min-width: 500px;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  align-items: end;
+  height: 100%;
+  margin-left: 10px;
+
+  @include tablet {
+    width: 100%;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+}

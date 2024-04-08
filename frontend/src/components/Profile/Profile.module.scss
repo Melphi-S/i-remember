@@ -1,0 +1,67 @@
+@import "../../app/styles/mixins";
+
+.profile {
+  width: 24.5vw;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  box-shadow: var(--inverted-bg-color) 0 3px 8px;
+  background: var(--bg-color);
+  border-radius: 20px;
+
+  @include laptop {
+    width: 40vw;
+  }
+
+  @include tablet {
+    width: 55vw;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 0 20px;
+  }
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  padding: 10px;
+  max-height: 75vh;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+.forms::-webkit-scrollbar-thumb {
+  background-color: var(--inverted-bg-color)
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.switchers {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.logout {
+  color: var(--error-color);
+  font-family: Stengazeta, sans-serif;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: min-content;
+  font-size: var(--font-size-l);
+  line-height: var(--font-line-l);
+}

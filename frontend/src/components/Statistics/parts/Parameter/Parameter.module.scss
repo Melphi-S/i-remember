@@ -1,0 +1,23 @@
+.parameterWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px dotted var(--primary-color);
+}
+
+.parameter {
+  margin: 0;
+  padding: 0;
+
+  &_size_common {
+    font-size: var(--font-line-s);
+    line-height: var(--font-line-s);
+  }
+
+  &_size_large {
+    font-size: var(--font-line-m);
+    line-height: var(--font-line-m);
+  }
+}

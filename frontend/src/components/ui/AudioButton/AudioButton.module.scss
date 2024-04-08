@@ -1,0 +1,26 @@
+.iconColor * {
+  fill: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.noAudioIcon {
+  opacity: 0.2;
+}
+
+.common {
+  height: 70px;
+  width: 70px;
+}
+
+.small {
+  height: 35px;
+  width: 35px;
+}
+
+.button {
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+}

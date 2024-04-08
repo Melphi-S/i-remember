@@ -1,0 +1,39 @@
+.form {
+  //display: grid;
+  //grid-template-columns: 1fr 1fr;
+  //grid-template-areas: 'select select'
+  //                      'hex-picker avatar';
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px var(--primary-color) solid;
+}
+
+.selectWrapper {
+  display: flex;
+  justify-content: space-around;
+  grid-area: select;
+  gap: 10px;
+  z-index: 10;
+}
+
+.imageWrapper {
+  grid-area: avatar;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hexWrapper {
+  width: 100%;
+}
+.hexTitle {
+  margin: 0 0 5px 10px;
+}

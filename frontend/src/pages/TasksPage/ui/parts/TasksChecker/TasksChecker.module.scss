@@ -1,0 +1,73 @@
+@import "../../../../../app/styles/mixins";
+
+.wrapper {
+  width: min-content;
+  margin: 0 auto;
+}
+
+.briefWrapper {
+  min-height: 80px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  @include mobile {
+    min-height: 96px;
+  }
+
+}
+
+.brief {
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-m);
+  line-height: var(--font-line-m);
+}
+
+.resultMessage {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: var(--font-line-xl);
+  line-height: var(--font-line-xl);
+  font-family: Stengazeta, sans-serif;
+  width: 100%;
+
+  &_right {
+    color: var(--success-color);
+  }
+
+  &_wrong {
+    color: var(--error-color);
+  }
+}
+
+.checkWrapper {
+  &_right {
+    -moz-box-shadow: 0 0 20px var(--success-color);
+    -webkit-box-shadow: 0 0 20px var(--success-color);
+    box-shadow: 0 0 20px var(--success-color);
+  }
+  &_wrong {
+    -moz-box-shadow: 0 0 20px var(--error-color);
+    -webkit-box-shadow: 0 0 20px var(--error-color);
+    box-shadow: 0 0 20px var(--error-color);
+  }
+}
+
+.errorWrapper {
+  height: 20px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.button {
+  margin-top: 20px;
+}

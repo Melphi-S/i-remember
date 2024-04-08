@@ -1,0 +1,32 @@
+@import "../../app/styles/mixins";
+
+.card {
+  width: 500px;
+  height: 500px;
+  z-index: 999;
+  color: #373a36;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+
+  @include mobile {
+    width: 90vw;
+    height: 100%;
+    }
+}
+
+.yellow {
+  background: #ff9;
+}
+
+.green {
+  background: #cfc;
+}
+
+.violet {
+  background: #ccf;
+}

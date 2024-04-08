@@ -1,0 +1,36 @@
+@import "../../app/styles/mixins";
+
+.item {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 2fr 4fr 2fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px dotted var(--primary-color);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-sm);
+  gap: 5px;
+
+  @include laptop {
+    grid-template-columns: 2fr 0.5fr 2fr 3fr 1fr;
+    cursor: pointer;
+  }
+
+  @include tablet {
+    grid-template-columns: 2fr 3fr 1fr;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.justifyCenter {
+  justify-self: center;
+}
+
+.justifyEnd {
+  justify-self: end;
+}
+
+.withPadding {
+  padding-left: 20px;
+}
